@@ -8,7 +8,6 @@ import com.tech.ada.spring_cinestream.model.Usuario;
 
 import java.util.List;
 
-
 public class UsuarioMapper {
 
     public Usuario toEntity(UsuarioRequest dto) {
@@ -16,6 +15,7 @@ public class UsuarioMapper {
         usuario.setNome(dto.getNome());
         usuario.setNickName(dto.getNickname());
         usuario.setEmail(dto.getEmail());
+        usuario.setSenha(dto.getSenha());
         return usuario;
     }
 

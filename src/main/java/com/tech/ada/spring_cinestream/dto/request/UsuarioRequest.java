@@ -4,6 +4,7 @@ public class UsuarioRequest {
     private String nome;
     private String nickname;
     private String email;
+    private String senha;
 
     public UsuarioRequest() {}
 
@@ -31,4 +32,11 @@ public class UsuarioRequest {
         this.email = email;
     }
 
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
 }
