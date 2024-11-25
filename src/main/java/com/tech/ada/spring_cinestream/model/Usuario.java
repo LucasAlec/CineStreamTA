@@ -1,8 +1,6 @@
 package com.tech.ada.spring_cinestream.model;
 
-
 import jakarta.persistence.*;
-import java.util.List;
 
 @Entity
 public class Usuario {
@@ -66,4 +64,3 @@ public class Usuario {
         this.nickName = nickName;
     }
 }
-

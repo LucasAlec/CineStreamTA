@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.time.Instant;
 
 @Entity
-public class TokenEntity {
+public class Token {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,10 +19,10 @@ public class TokenEntity {
     private Usuario usuario;
 
 
-    public TokenEntity() {
+    public Token() {
     }
 
-    public TokenEntity(String token, Instant expirationDate, Usuario usuario) {
+    public Token(String token, Instant expirationDate, Usuario usuario) {
         this.token = token;
         this.expirationDate = expirationDate;
         this.usuario = usuario;
