@@ -6,7 +6,7 @@ import com.auth0.jwt.exceptions.JWTCreationException;
 import com.tech.ada.spring_cinestream.exception.AuthenticationFailedException;
 import com.tech.ada.spring_cinestream.model.Usuario;
 import com.tech.ada.spring_cinestream.repository.TokenRepository;
-import com.tech.ada.spring_cinestream.model.TokenEntity;
+import com.tech.ada.spring_cinestream.model.Token;
 import com.tech.ada.spring_cinestream.dto.token.TokenResult;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -29,17 +29,17 @@ public class JWTService {
     }
 
     public Optional<TokenResult> getToken(String token) {
-        Optional<TokenEntity> tokenEntityOptional = tokenRepository.findByToken(token);
+        Optional<Token> tokenEntityOptional = tokenRepository.findByToken(token);
 
         if (tokenEntityOptional.isPresent()) {
-            TokenEntity tokenEntity = tokenEntityOptional.get();
+            Token tokenEntity = tokenEntityOptional.get();
             return Optional.of(new TokenResult(tokenEntity, isExpired(tokenEntity)));
         }
 
         return Optional.empty();
     }
 
-    public boolean isExpired(TokenEntity tokenEntity) {
+    public boolean isExpired(Token tokenEntity) {
         return tokenEntity.getExpirationDate().isBefore(Instant.now());
     }
 
@@ -52,7 +52,7 @@ public class JWTService {
                     .withExpiresAt(expirationDate)
                     .sign(algorithm);
 
-            TokenEntity tokenEntity = new TokenEntity(token, expirationDate, user);
+            Token tokenEntity = new Token(token, expirationDate, user);
             tokenRepository.saveAndFlush(tokenEntity);
             return token;
         } catch (JWTCreationException e) {
