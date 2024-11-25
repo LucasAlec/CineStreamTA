@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/usuarios")
 public class UsuarioController {
-    private UsuarioService usuarioService;
+    private final UsuarioService usuarioService;
 
     public UsuarioController(UsuarioService usuarioService) {
         this.usuarioService = usuarioService;
@@ -20,7 +20,7 @@ public class UsuarioController {
 
     @PostMapping
     public ResponseEntity<UsuarioResponse> criarUsuario(@RequestBody UsuarioRequest usuario) throws AlreadyExistsException {
-        UsuarioResponse novoUsuario =  usuarioService.criar(usuario);
+        UsuarioResponse novoUsuario = usuarioService.criar(usuario);
         return ResponseEntity.status(HttpStatus.CREATED).body(novoUsuario);
     }
 
