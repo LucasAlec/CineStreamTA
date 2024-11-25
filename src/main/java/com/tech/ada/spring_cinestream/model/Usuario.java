@@ -16,7 +16,6 @@ public class Usuario {
     private String email;
     private String senha;
 
-    // Construtores, getters e setters
     public Usuario() {
     }
 
