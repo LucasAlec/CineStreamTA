@@ -1,7 +1,11 @@
 package com.tech.ada.spring_cinestream.client.tmdbapi;
 
 import com.tech.ada.spring_cinestream.client.tmdbapi.dto.response.*;
+import com.tech.ada.spring_cinestream.exception.ApiClientException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -10,192 +14,142 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.util.Map;
+
 @Component
 public class ApiClient {
+    private final String apiKey;
     private final RestTemplate restTemplate;
+    private final String apiBaseUrl;
+    private final Logger logger = LoggerFactory.getLogger(ApiClient.class);
 
-    @Value("${api.base.url}")
-    private String apiBaseUrl;
-
-    @Value("${api.key}")
-    private String apiKey;
-
-    public ApiClient() {
-        this.restTemplate = new RestTemplate();
+    public ApiClient(RestTemplate restTemplate, @Value("${api.key}") String apiKey, @Value("${api.base.url}") String apiBaseUrl) {
+        this.apiKey = apiKey;
+        this.apiBaseUrl = apiBaseUrl;
+        this.restTemplate = restTemplate;
     }
 
-    // ENDPOINTS da API externa
-
-    //FILMES
     public Page<TmdbFilme> buscarFilmesPorTitulo(String titulo, Integer page) {
-        String url = UriComponentsBuilder.fromHttpUrl(apiBaseUrl)
-                .path("/search/movie")
-                .queryParam("page", page)
-                .queryParam("query", titulo)
-                .queryParam("language", "pt-BR")
-                .toUriString();
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("Authorization", String.format("Bearer %s", apiKey));
-
-        HttpEntity<String> entity = new HttpEntity<>(headers);
-
-        var response = restTemplate.exchange(
-            url,
-            HttpMethod.GET,
-            entity,
-            new ParameterizedTypeReference<Page<TmdbFilme>>() {}
-        );
-
-        return response.getBody();
+        return makeApiCall(
+                "/search/movie",
+                getParams(Map.of(
+                    "page", page,
+                    "query", titulo
+                )),
+                new ParameterizedTypeReference<>() {}
+                );
     }
 
-    public TmdbFilme buscarDetalhesFilme(Long id) {
-        String url = UriComponentsBuilder.fromHttpUrl(apiBaseUrl)
-                .path("/movie/" + id)
-                .toUriString();
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("Authorization", String.format("Bearer %s", apiKey));
+    public TmdbFilme buscarDetalhesFilme(long id) {
+        String path = String.format("/movie/%d", id);
 
-        HttpEntity<String> entity = new HttpEntity<>(headers);
-
-        var response = restTemplate.exchange(
-                url,
-                HttpMethod.GET,
-                entity,
+        return makeApiCall(
+                path,
+                Map.of(),
                 TmdbFilme.class
         );
-        return response.getBody();
     }
 
+    @Cacheable("generosFilmes")
     public TmdbListaGeneros generosFilmes() {
-        String url = UriComponentsBuilder.fromHttpUrl(apiBaseUrl)
-                .path("/genre/movie/list")
-                .queryParam("language", "pt")
-                .toUriString();
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("Authorization", String.format("Bearer %s", apiKey));
-
-        HttpEntity<String> entity = new HttpEntity<>(headers);
-
-        var response = restTemplate.exchange(
-                url,
-                HttpMethod.GET,
-                entity,
+        return makeApiCall(
+                "/genre/movie/list",
+                getParams(),
                 TmdbListaGeneros.class
         );
-        return response.getBody();
     }
 
     public Page<TmdbFilme> buscarFilmesPorAnoLancamento(String ano, Integer page) {
-        String url = UriComponentsBuilder.fromHttpUrl(apiBaseUrl)
-                .path("/search/movie")
-                .queryParam("query", " ")
-                .queryParam("page", page)
-                .queryParam("year", ano)
-                .queryParam("language", "pt-BR")
-                .toUriString();
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("Authorization", String.format("Bearer %s", apiKey));
-
-        HttpEntity<String> entity = new HttpEntity<>(headers);
-
-        var response = restTemplate.exchange(
-                url,
-                HttpMethod.GET,
-                entity,
-                new ParameterizedTypeReference<Page<TmdbFilme>>() {}
+        return makeApiCall(
+                "/search/movie",
+                getParams(Map.of(
+                    "query", " ",
+                    "page", page,
+                    "year", ano
+                )),
+                new ParameterizedTypeReference<>() {}
         );
-
-        return response.getBody();
     }
 
-
-    // SERIES
     public Page<TmdbSerie> buscarSeriesPorTitulo(String titulo, Integer page) {
-        String url = UriComponentsBuilder.fromHttpUrl(apiBaseUrl)
-                .path("/search/tv")
-                .queryParam("api_key", apiKey)
-                .queryParam("query", titulo)
-                .queryParam("page", page)
-                .queryParam("language", "pt-BR")
-                .toUriString();
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("Authorization", String.format("Bearer %s", apiKey));
-
-        HttpEntity<String> entity = new HttpEntity<>(headers);
-
-        var response = restTemplate.exchange(
-                url,
-                HttpMethod.GET,
-                entity,
-                new ParameterizedTypeReference<Page<TmdbSerie>>() {}
-        );
-
-        return response.getBody();
+        return makeApiCall(
+                "/search/tv",
+                getParams(Map.of(
+                    "api_key", apiKey,
+                    "query", titulo,
+                    "page", page
+                )),
+                new ParameterizedTypeReference<>() {}
+                );
     }
 
+    @Cacheable("generosSeries")
     public TmdbListaGeneros generosSeries() {
-        String url = UriComponentsBuilder.fromHttpUrl(apiBaseUrl)
-                .path("/genre/tv/list")
-                .queryParam("language", "pt")
-                .toUriString();
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("Authorization", String.format("Bearer %s", apiKey));
-
-        HttpEntity<String> entity = new HttpEntity<>(headers);
-
-        var response = restTemplate.exchange(
-                url,
-                HttpMethod.GET,
-                entity,
-                TmdbListaGeneros.class
-        );
-        return response.getBody();
+        return makeApiCall("/genre/tv/list", getParams(), TmdbListaGeneros.class);
     }
 
     public Page<TmdbSerie> buscarSeriesPorAnoLancamento(String ano, Integer page) {
-        String url = UriComponentsBuilder.fromHttpUrl(apiBaseUrl)
-                .path("/search/tv")
-                .queryParam("query", " ")
-                .queryParam("page", page)
-                .queryParam("first_air_date_year", ano)
-                .queryParam("language", "pt-BR")
-                .toUriString();
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("Authorization", String.format("Bearer %s", apiKey));
-
-        HttpEntity<String> entity = new HttpEntity<>(headers);
-
-        var response = restTemplate.exchange(
-                url,
-                HttpMethod.GET,
-                entity,
-                new ParameterizedTypeReference<Page<TmdbSerie>>() {}
+        return makeApiCall(
+                "/search/tv",
+                getParams(Map.of(
+                    "page", page,
+                    "query", " ",
+                    "first_air_date_year", ano
+                )),
+                new ParameterizedTypeReference<>() {}
         );
-
-        return response.getBody();
     }
 
-    public TmdbSerie buscarDetalhesSerie(Long id) {
-        String url = UriComponentsBuilder.fromHttpUrl(apiBaseUrl)
-                .path("/tv/" + id)
-                .toUriString();
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("Authorization", String.format("Bearer %s", apiKey));
-
-        HttpEntity<String> entity = new HttpEntity<>(headers);
-
-        var response = restTemplate.exchange(
-                url,
-                HttpMethod.GET,
-                entity,
+    public TmdbSerie buscarDetalhesSerie(long id) {
+        String path = String.format("/tv/%d", id);
+        return makeApiCall(
+                path,
+                Map.of(),
                 TmdbSerie.class
         );
-        return response.getBody();
+    }
+
+    private HttpHeaders getHeader() {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setBearerAuth(apiKey);
+        return headers;
+    }
+
+    private <T> T makeApiCall(String path, Map<String, Object> queryParams, ParameterizedTypeReference<T> responseType) {
+        String url = buildUrl(path, queryParams);
+        logger.info("Fazendo chamada à API: {}", url.replace(apiKey, "API_KEY"));
+        try {
+            return restTemplate.exchange(url, HttpMethod.GET, new HttpEntity<>(getHeader()), responseType).getBody();
+        } catch (Exception e) {
+            logger.error("Erro na chamada à API: {}", url.replace(apiKey, "API_KEY"), e);
+            throw new ApiClientException("Erro na chamada API", e);
+        }
+    }
+
+    private <T> T makeApiCall(String path, Map<String, Object> queryParams, Class<T> responseType) {
+        String url = buildUrl(path, queryParams);
+        logger.info("Fazendo chamada à API: {}", url.replace(apiKey, "API_KEY"));
+        try {
+            return restTemplate.exchange(url, HttpMethod.GET, new HttpEntity<>(getHeader()), responseType).getBody();
+        } catch (Exception e) {
+            logger.error("Erro na chamada à API: {}", url.replace(apiKey, "API_KEY"), e);
+            throw new ApiClientException("Erro na chamada API", e);
+        }
+    }
+
+    private String buildUrl(String path, Map<String, Object> queryParams) {
+        UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(apiBaseUrl).path(path);
+        queryParams.forEach(builder::queryParam);
+        return builder.toUriString();
+    }
+
+    private Map<String, Object> getParams(Map<String, Object> params) {
+        Map<String, Object> defaults = getParams();
+        params.putAll(defaults);
+        return params;
+    }
+
+    private Map<String, Object> getParams() {
+        return Map.of("language", "pt-BR");
     }
 }
