@@ -54,11 +54,16 @@ public class SecurityFilter extends OncePerRequestFilter {
         filterChain.doFilter(request, response);
     }
 
+
+
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) {
         String path = request.getServletPath();
 
-        return path.startsWith("/login") || path.startsWith("/register");
+        return path.startsWith("/login") ||
+                path.startsWith("/register") ||
+                path.startsWith("/h2") ||
+                path.startsWith("/api/usuarios");
     }
 
     private String recoverToken(HttpServletRequest request) {

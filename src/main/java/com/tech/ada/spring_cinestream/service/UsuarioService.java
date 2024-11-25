@@ -14,6 +14,7 @@ import com.tech.ada.spring_cinestream.model.Usuario;
 import com.tech.ada.spring_cinestream.repository.FilmeFavoritoRepository;
 import com.tech.ada.spring_cinestream.repository.SerieFavoritaRepository;
 import com.tech.ada.spring_cinestream.repository.UsuarioRepository;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
@@ -22,11 +23,13 @@ import java.util.Optional;
 
 @Service
 public class UsuarioService {
+
     private final UsuarioRepository usuarioRepository;
     private final UsuarioMapper usuarioMapper;
     private final ApiClient apiClient;
     private final FilmeFavoritoRepository filmeFavoritoRepository;
     private final SerieFavoritaRepository serieFavoritaRepository;
+    private final BCryptPasswordEncoder passwordEncoder;
 
     public UsuarioService(UsuarioRepository usuarioRepository, ApiClient apiClient, FilmeFavoritoRepository filmeFavoritoRepository, SerieFavoritaRepository serieFavoritaRepository) {
         this.usuarioRepository = usuarioRepository;
@@ -34,6 +37,7 @@ public class UsuarioService {
         this.filmeFavoritoRepository = filmeFavoritoRepository;
         this.serieFavoritaRepository = serieFavoritaRepository;
         this.usuarioMapper = new UsuarioMapper();
+        this.passwordEncoder = new BCryptPasswordEncoder();
     }
 
     public UsuarioResponse criar(UsuarioRequest usuarioRequest) throws AlreadyExistsException {
@@ -46,6 +50,7 @@ public class UsuarioService {
         }
 
         Usuario usuario = usuarioMapper.toEntity(usuarioRequest);
+        usuario.setSenha(passwordEncoder.encode(usuarioRequest.getSenha()));
         Usuario usuarioSalvo = usuarioRepository.save(usuario);
 
         return usuarioMapper.toDTO(usuarioSalvo, Collections.emptyList(), Collections.emptyList());
@@ -77,11 +82,17 @@ public class UsuarioService {
                 )));
     }
 
+    public Optional<Usuario> validateUserLogin(String email, String senha) {
+        Optional<Usuario> usuario = usuarioRepository.findByEmail(email);
+
+        if (usuario.isPresent() && passwordEncoder.matches(senha, usuario.get().getSenha())) {  // Verificando a senha criptografada
+            return usuario;
+        }
+        return Optional.empty();
+    }
+
     public Usuario buscarUsuarioPorEmail(String email) throws NotFoundException {
         return usuarioRepository.findByEmail(email)
                 .orElseThrow(() -> new NotFoundException("Email " + email + " não encontrado"));
     }
-
-
-
 }
