@@ -2,8 +2,10 @@ package com.tech.ada.spring_cinestream.client.tmdbapi.dto.response;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
+import jakarta.persistence.Embeddable;
 
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
+@Embeddable
 public class TmdbFilme {
     private String title;
     private String overview;
@@ -11,6 +13,8 @@ public class TmdbFilme {
     private double voteAverage;
     private String posterPath;
     private Long id;
+
+    public TmdbFilme() {}
 
     public TmdbFilme(String title, String overview, String releaseDate, double voteAverage, String posterPath, Long id) {
         this.title = title;

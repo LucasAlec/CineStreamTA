@@ -8,7 +8,7 @@ import java.util.List;
 public class UsuarioResponse {
     private Long id;
     private String nome;
-    private String nickname;
+    private String username;
     private String email;
     private List<TmdbFilme> filmesFavoritos;
     private List<TmdbSerie> seriesFavoritas;
@@ -16,10 +16,10 @@ public class UsuarioResponse {
     public UsuarioResponse () {
     }
 
-    public UsuarioResponse(Long id, String nome, String nickname, String email, List<TmdbFilme> filmesFavoritos, List<TmdbSerie> seriesFavoritas) {
+    public UsuarioResponse(Long id, String nome, String username, String email, List<TmdbFilme> filmesFavoritos, List<TmdbSerie> seriesFavoritas) {
         this.id = id;
         this.nome = nome;
-        this.nickname = nickname;
+        this.username = username;
         this.email = email;
         this.filmesFavoritos = filmesFavoritos;
         this.seriesFavoritas = seriesFavoritas;
@@ -41,12 +41,12 @@ public class UsuarioResponse {
         this.nome = nome;
     }
 
-    public String getNickname() {
-        return nickname;
+    public String getUsername() {
+        return username;
     }
 
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getEmail() {

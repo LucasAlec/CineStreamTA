@@ -2,7 +2,7 @@ package com.tech.ada.spring_cinestream.dto.request;
 
 public class UsuarioRequest {
     private String nome;
-    private String nickname;
+    private String username;
     private String email;
     private String senha;
 
@@ -16,12 +16,12 @@ public class UsuarioRequest {
         this.nome = nome;
     }
 
-    public String getNickname() {
-        return nickname;
+    public String getUsername() {
+        return username;
     }
 
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getEmail() {

@@ -1,5 +1,7 @@
 package com.tech.ada.spring_cinestream.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.tech.ada.spring_cinestream.client.tmdbapi.dto.response.TmdbFilme;
 import jakarta.persistence.*;
 
 @Entity
@@ -8,12 +10,15 @@ public class FilmeFavorito {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long tmdbId;
+    @Embedded
+    private TmdbFilme tmdbFilme;
 
-    @ManyToOne(optional = false)
+    @ManyToOne
+    @JoinColumn(name = "usuario_id")
+    @JsonIgnore
     private Usuario usuario;
 
-    public FilmeFavorito () {}
+    public FilmeFavorito() {}
 
     public Long getId() {
         return id;
@@ -23,19 +28,19 @@ public class FilmeFavorito {
         this.id = id;
     }
 
-    public Long getTmdbId() {
-        return tmdbId;
-    }
-
-    public void setTmdbId(Long tmdbId) {
-        this.tmdbId = tmdbId;
-    }
-
     public Usuario getUsuario() {
         return usuario;
     }
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
+    }
+
+    public void setTmdbFilme(TmdbFilme tmdbFilme) {
+        this.tmdbFilme = tmdbFilme;
+    }
+
+    public TmdbFilme getTmdbFilme() {
+        return tmdbFilme;
     }
 }

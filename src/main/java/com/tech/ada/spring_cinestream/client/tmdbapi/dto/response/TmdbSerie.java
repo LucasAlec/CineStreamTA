@@ -2,12 +2,16 @@ package com.tech.ada.spring_cinestream.client.tmdbapi.dto.response;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
+import jakarta.persistence.ElementCollection;
+import jakarta.persistence.Embeddable;
 
 import java.util.List;
 
 
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
+@Embeddable
 public class TmdbSerie {
+    @ElementCollection
     private List<Integer> genreIds;
     private Integer id;
     private String name;

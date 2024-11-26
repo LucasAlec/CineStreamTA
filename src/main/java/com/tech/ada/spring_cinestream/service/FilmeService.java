@@ -6,7 +6,7 @@ import com.tech.ada.spring_cinestream.client.tmdbapi.dto.response.TmdbFilme;
 import com.tech.ada.spring_cinestream.dto.mapping.FilmeFavoritoMapper;
 import com.tech.ada.spring_cinestream.dto.request.FilmeFavoritoRequest;
 import com.tech.ada.spring_cinestream.exception.NotFoundException;
-import com.tech.ada.spring_cinestream.model.FilmeFavorito;
+import com.tech.ada.spring_cinestream.model.FilmesFavoritos;
 import com.tech.ada.spring_cinestream.model.Usuario;
 import com.tech.ada.spring_cinestream.repository.FilmeFavoritoRepository;
 import org.springframework.stereotype.Service;
@@ -32,7 +32,7 @@ public class FilmeService {
         Usuario usuario = usuarioService.buscarPorId(filmeFavoritoRequest.getIdUsuario());
 
         FilmeFavoritoMapper mapper = new FilmeFavoritoMapper();
-        FilmeFavorito filmeFavorito = mapper.toEntity(filmeFavoritoRequest, usuario);
+        FilmesFavoritos filmeFavorito = mapper.toEntity(filmeFavoritoRequest, usuario);
 
         filmeFavoritoRepository.save(filmeFavorito);
     }

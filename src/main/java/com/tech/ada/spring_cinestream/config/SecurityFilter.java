@@ -46,7 +46,7 @@ public class SecurityFilter extends OncePerRequestFilter {
                     var authentication = new UsernamePasswordAuthenticationToken(usuario, null, authorities);
                     SecurityContextHolder.getContext().setAuthentication(authentication);
                 } catch (NotFoundException e) {
-                    logger.error("Usuário não encontrado para o login: {}", login.get(), e);
+                    logger.error("Usuário não encontrado para o email: {}", login.get(), e);
                 }
             }
         }
@@ -60,10 +60,10 @@ public class SecurityFilter extends OncePerRequestFilter {
     protected boolean shouldNotFilter(HttpServletRequest request) {
         String path = request.getServletPath();
 
-        return path.startsWith("/login") ||
+        return path.startsWith("/email") ||
                 path.startsWith("/register") ||
                 path.startsWith("/h2") ||
-                path.startsWith("/api/usuarios");
+                path.startsWith("/usuario/");
     }
 
     private String recoverToken(HttpServletRequest request) {

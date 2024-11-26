@@ -1,6 +1,10 @@
 package com.tech.ada.spring_cinestream.model;
 
+import com.tech.ada.spring_cinestream.client.tmdbapi.dto.response.TmdbFilme;
+import com.tech.ada.spring_cinestream.client.tmdbapi.dto.response.TmdbSerie;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 public class Usuario {
@@ -10,16 +14,21 @@ public class Usuario {
     private Long id;
 
     private String nome;
-    private String nickName;
+    private String username;
     private String email;
     private String senha;
 
-    public Usuario() {
-    }
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<FilmeFavorito> filmesFavoritos;
 
-    public Usuario(String nome, String nickName, String email, String senha) {
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<SerieFavorita> seriesFavoritas;
+
+    public Usuario() {}
+
+    public Usuario(String nome, String username, String email, String senha) {
         this.nome = nome;
-        this.nickName = nickName;
+        this.username = username;
         this.email = email;
         this.senha = senha;
     }
@@ -56,11 +65,23 @@ public class Usuario {
         this.senha = senha;
     }
 
-    public String getNickName() {
-        return nickName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
+    public void setUsername(String username) {this.username = username;}
+
+    public List<TmdbSerie> getSeriesFavoritas() {
+        return seriesFavoritas.stream().map(SerieFavorita::getTmdbSerie).toList();
     }
+
+    public void setSeriesFavoritas(List<SerieFavorita> seriesFavoritas) {
+        this.seriesFavoritas = seriesFavoritas;
+    }
+
+    public List<TmdbFilme> getFilmesFavoritos() {
+        return filmesFavoritos.stream().map(FilmeFavorito::getTmdbFilme).toList();
+    }
+
+    public void setFilmesFavoritos(List<FilmeFavorito> filmesFavoritos) {this.filmesFavoritos = filmesFavoritos;}
 }

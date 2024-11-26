@@ -1,5 +1,7 @@
 package com.tech.ada.spring_cinestream.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.tech.ada.spring_cinestream.client.tmdbapi.dto.response.TmdbSerie;
 import jakarta.persistence.*;
 
 @Entity
@@ -7,9 +9,13 @@ public class SerieFavorita {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long tmdbId;
 
-    @ManyToOne(optional = false)
+    @Embedded
+    private TmdbSerie tmdbSerie;
+
+    @ManyToOne
+    @JoinColumn(name = "usuario_id")
+    @JsonIgnore
     private Usuario usuario;
 
     public SerieFavorita() {}
@@ -22,19 +28,19 @@ public class SerieFavorita {
         this.id = id;
     }
 
-    public Long getTmdbId() {
-        return tmdbId;
-    }
-
-    public void setTmdbId(Long tmdbId) {
-        this.tmdbId = tmdbId;
-    }
-
     public Usuario getUsuario() {
         return usuario;
     }
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
+    }
+
+    public void setTmdbSerie(TmdbSerie tmdbSerie) {
+        this.tmdbSerie = tmdbSerie;
+    }
+
+    public TmdbSerie getTmdbSerie() {
+        return tmdbSerie;
     }
 }

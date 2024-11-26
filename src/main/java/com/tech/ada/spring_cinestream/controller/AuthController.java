@@ -1,7 +1,10 @@
 package com.tech.ada.spring_cinestream.controller;
 
 import com.tech.ada.spring_cinestream.dto.request.LoginRequest;
+import com.tech.ada.spring_cinestream.dto.request.UsuarioRequest;
 import com.tech.ada.spring_cinestream.dto.response.LoginResponse;
+import com.tech.ada.spring_cinestream.dto.response.UsuarioResponse;
+import com.tech.ada.spring_cinestream.exception.AlreadyExistsException;
 import com.tech.ada.spring_cinestream.exception.AuthenticationFailedException;
 import com.tech.ada.spring_cinestream.model.Usuario;
 import com.tech.ada.spring_cinestream.service.JWTService;
@@ -15,12 +18,12 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Optional;
 
 @RestController
-public class LoginController {
+public class AuthController {
 
     private final UsuarioService usuarioService;
     private final JWTService jwtService;
 
-    public LoginController(UsuarioService usuarioService, JWTService jwtService) {
+    public AuthController(UsuarioService usuarioService, JWTService jwtService) {
         this.usuarioService = usuarioService;
         this.jwtService = jwtService;
     }
@@ -28,8 +31,8 @@ public class LoginController {
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequestDTO) {
         try {
-            Optional<Usuario> usuario = usuarioService.validateUserLogin(loginRequestDTO.login(), loginRequestDTO.password());
-            if (usuario.isEmpty()) throw new AuthenticationFailedException("Usuário ou senha incorretos");
+            Optional<Usuario> usuario = usuarioService.validateUserLogin(loginRequestDTO.email(), loginRequestDTO.senha());
+            if (usuario.isEmpty()) throw new AuthenticationFailedException("Email ou senha incorretos");
 
             String token = jwtService.generateToken(usuario.get());
             return ResponseEntity.ok(new LoginResponse(token, usuario.get().getEmail()));
@@ -39,4 +42,9 @@ public class LoginController {
         }
     }
 
+    @PostMapping("/register")
+    public ResponseEntity<UsuarioResponse> criarUsuario(@RequestBody UsuarioRequest usuario) throws AlreadyExistsException {
+        UsuarioResponse novoUsuario = usuarioService.criar(usuario);
+        return ResponseEntity.status(HttpStatus.CREATED).body(novoUsuario);
+    }
 }
