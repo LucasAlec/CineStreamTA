@@ -60,4 +60,26 @@ public class AuthControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.email").value("ana@example.com"));
     }
 
+    @Test
+    public void dadoUsuarioSejaInvalido_quandoFizerLogin_entaoRetornaErro401() throws Exception {
+        // Dado
+        LoginRequest loginRequest = new LoginRequest("ana@example.com", "wrongpassword");
+
+        Mockito.when(usuarioService.validateUserLogin("ana@example.com", "wrongpassword"))
+                .thenReturn(Optional.empty());
+
+        // Quando
+        mockMvc.perform(
+                        MockMvcRequestBuilders.post("/login")
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .content(objectMapper.writeValueAsString(loginRequest))
+                )
+                // Então
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(MockMvcResultMatchers.status().isUnauthorized())
+                .andExpect(MockMvcResultMatchers.content().string("Email ou senha incorretos"));
+    }
+
+
+
 }
