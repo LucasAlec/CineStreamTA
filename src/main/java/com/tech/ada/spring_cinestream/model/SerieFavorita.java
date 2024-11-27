@@ -23,8 +23,9 @@ public class SerieFavorita {
 
     public SerieFavorita() {}
 
-    public SerieFavorita(TmdbSerie tmdbSerie) {
+    public SerieFavorita(TmdbSerie tmdbSerie, Usuario usuario) {
         this.tmdbSerie = tmdbSerie;
+        this.usuario = usuario;
     }
 
     public Long getId() {
@@ -33,6 +34,10 @@ public class SerieFavorita {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getTmdbId() {
+        return tmdbSerie.getId();
     }
 
     public Usuario getUsuario() {

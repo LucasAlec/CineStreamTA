@@ -47,13 +47,12 @@ public class UsuarioService {
         return usuarioRepository.save(usuario);
     }
 
-    public UsuarioResponse buscarPorEmail(String email) throws NotFoundException {
-        Usuario usuario = usuarioRepository.findByEmail(email)
+    public Usuario buscarPorEmail(String email) throws NotFoundException {
+
+        return usuarioRepository.findByEmail(email)
                 .orElseThrow(
                         () -> new NotFoundException(String.format("Email %s não encontrado", email)
                 ));
-
-        return usuarioMapper.toDTO(usuario, usuario.getFilmesFavoritos(), usuario.getSeriesFavoritas());
     }
 
     public Usuario buscarPorId(Long id) throws NotFoundException {
@@ -87,9 +86,8 @@ public class UsuarioService {
 
     @Transactional
     public void removerFilmeFavorito(Long id, Usuario usuario) throws NotFoundException {
-        TmdbFilme tmdbFilme = tmdbClient.buscarDetalhesFilme(id);
         if (!usuario.filmeJaEFavorito(id)) throw new NotFoundException();
-        usuario.removeFilmeFavorito(tmdbFilme);
+        usuario.removeFilmeFavorito(id);
         usuarioRepository.save(usuario);
     }
 
@@ -103,9 +101,8 @@ public class UsuarioService {
 
     @Transactional
     public void removerSerieFavorita(Long id, Usuario usuario) throws NotFoundException {
-        TmdbSerie tmdbSerie = tmdbClient.buscarDetalhesSerie(id);
         if (!usuario.serieJaEFavorita(id)) throw new NotFoundException();
-        usuario.removeSerieFavorita(tmdbSerie);
+        usuario.removeSerieFavorita(id);
         usuarioRepository.save(usuario);
     }
 }

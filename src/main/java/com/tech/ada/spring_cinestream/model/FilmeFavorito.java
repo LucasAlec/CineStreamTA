@@ -17,18 +17,23 @@ public class FilmeFavorito {
     private TmdbFilme tmdbFilme;
 
     @ManyToOne
-    @JoinColumn(name = "usuario_id")
     @JsonIgnore
+    @JoinColumn(name = "usuario_id")
     private Usuario usuario;
 
     public FilmeFavorito() {}
 
-    public FilmeFavorito(TmdbFilme tmdbFilme) {
+    public FilmeFavorito(TmdbFilme tmdbFilme, Usuario usuario) {
         this.tmdbFilme = tmdbFilme;
+        this.usuario = usuario;
     }
 
     public Long getId() {
         return id;
+    }
+
+    public Long getTmdbId() {
+        return tmdbFilme.getId();
     }
 
     public void setId(Long id) {

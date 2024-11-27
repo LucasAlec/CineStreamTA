@@ -11,9 +11,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.util.List;
 
-// @Configuration
-public class CorsConfig /* implements WebMvcConfigurer */{
-    // @Override
+@Configuration
+public class CorsConfig implements WebMvcConfigurer {
+    /* @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
                 .allowedOrigins("*")
@@ -21,8 +21,9 @@ public class CorsConfig /* implements WebMvcConfigurer */{
                 .allowedMethods("GET", "POST", "OPTIONS")
                 .allowedHeaders("*");
     }
+    */
 
-    // @Bean
+    @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
         corsConfiguration.addAllowedOrigin("*");

@@ -2,6 +2,7 @@ package com.tech.ada.spring_cinestream.client.tmdbapi.dto.response;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
+import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Embeddable;
 
@@ -16,6 +17,7 @@ public class TmdbSerie {
     private List<Integer> genreIds;
     private Long id;
     private String name;
+    @Column(length = 6496)
     private String overview;
     private String firstAirDate;
     private double voteAverage;

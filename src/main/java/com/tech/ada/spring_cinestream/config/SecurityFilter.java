@@ -4,7 +4,6 @@ import com.tech.ada.spring_cinestream.model.Usuario;
 import com.tech.ada.spring_cinestream.exception.NotFoundException;
 import com.tech.ada.spring_cinestream.repository.UsuarioRepository;
 import com.tech.ada.spring_cinestream.service.JWTService;
-import com.tech.ada.spring_cinestream.service.UsuarioService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -39,7 +38,7 @@ public class SecurityFilter extends OncePerRequestFilter {
         var token = this.recoverToken(request);
 
         if (token != null && !token.isEmpty()) {
-            var login = jwtService.validateToken(token);
+            Optional<String> login = jwtService.validateToken(token);
 
             if (login.isPresent()) {
                 try {
@@ -65,12 +64,12 @@ public class SecurityFilter extends OncePerRequestFilter {
 
         return path.startsWith("/login") ||
                 path.startsWith("/register") ||
-                path.startsWith("/h2") ||
-                path.startsWith("/usuario/");
+                path.startsWith("/h2");
     }
 
     private String recoverToken(HttpServletRequest request) {
         var authHeader = request.getHeader("Authorization");
+        System.out.println(authHeader);
         if (authHeader == null) return null;
         return authHeader.replace("Bearer ", "");
     }

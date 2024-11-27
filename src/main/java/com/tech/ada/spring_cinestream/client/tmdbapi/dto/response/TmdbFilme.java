@@ -2,6 +2,7 @@ package com.tech.ada.spring_cinestream.client.tmdbapi.dto.response;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
+import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 
 import java.util.Objects;
@@ -10,6 +11,7 @@ import java.util.Objects;
 @Embeddable
 public class TmdbFilme {
     private String title;
+    @Column(length = 6496)
     private String overview;
     private String releaseDate;
     private double voteAverage;

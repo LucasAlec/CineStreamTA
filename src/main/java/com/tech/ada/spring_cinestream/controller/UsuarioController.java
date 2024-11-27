@@ -5,6 +5,7 @@ import com.tech.ada.spring_cinestream.exception.AlreadyFavouriteException;
 import com.tech.ada.spring_cinestream.exception.ApiClientException;
 import com.tech.ada.spring_cinestream.exception.NotFoundException;
 import com.tech.ada.spring_cinestream.model.Usuario;
+import com.tech.ada.spring_cinestream.repository.UsuarioRepository;
 import com.tech.ada.spring_cinestream.service.UsuarioService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +13,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/usuario")
 public class UsuarioController {
     private final UsuarioService usuarioService;
 
@@ -19,13 +21,12 @@ public class UsuarioController {
         this.usuarioService = usuarioService;
     }
 
-    @GetMapping("/usuario/{email}")
-    public ResponseEntity<UsuarioResponse> buscarUsuarioPorEmail(@PathVariable String email) throws NotFoundException {
-        UsuarioResponse emailUsuario = usuarioService.buscarPorEmail(email);
-        return ResponseEntity.status(HttpStatus.OK).body(emailUsuario);
+    @GetMapping("/{email}")
+    public ResponseEntity<Usuario> buscarUsuarioPorEmail(@PathVariable String email) throws NotFoundException {
+        return ResponseEntity.status(HttpStatus.OK).body(usuarioService.buscarPorEmail(email));
     }
 
-    @PostMapping("/usuario/filme/adicionarfavorito")
+    @PostMapping("/favorito/filme/adicionar")
     public ResponseEntity<?> adicionarFilmeFavorito(@RequestBody Long idTmdb) {
         Usuario usuario = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         try {
@@ -40,7 +41,7 @@ public class UsuarioController {
         }
     }
 
-    @PostMapping("/usuario/filme/removerfavorito")
+    @PostMapping("/favorito/filme/remover")
     public ResponseEntity<?> removerFilmeFavorito(@RequestBody Long idTmdb) {
         Usuario usuario = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         try {
@@ -55,7 +56,7 @@ public class UsuarioController {
         }
     }
 
-    @PostMapping("/usuario/serie/adicionarfavorito")
+    @PostMapping("/favorito/serie/adicionar")
     public ResponseEntity<?> adicionarSerieFavorita(@RequestBody Long idTmdb) {
         Usuario usuario = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         try {
@@ -70,7 +71,7 @@ public class UsuarioController {
         }
     }
 
-    @PostMapping("/usuario/serie/removerfavorito")
+    @PostMapping("/favorito/serie/remover")
     public ResponseEntity<?> removerSerieFavorita(@RequestBody Long idTmdb) {
         Usuario usuario = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         try {

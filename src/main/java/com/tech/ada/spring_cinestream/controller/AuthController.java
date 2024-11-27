@@ -44,7 +44,6 @@ public class AuthController {
 
     @PostMapping("/register")
     public ResponseEntity<Usuario> criarUsuario(@RequestBody UsuarioRequest usuario) throws AlreadyExistsException {
-        System.out.println(usuario.getSenha());
         Usuario novoUsuario = usuarioService.criar(usuario);
         return ResponseEntity.status(HttpStatus.CREATED).body(novoUsuario);
     }

@@ -22,10 +22,10 @@ public class Usuario {
     @JsonIgnore
     private String senha;
 
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     private List<FilmeFavorito> filmesFavoritos;
 
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     private List<SerieFavorita> seriesFavoritas;
 
     public Usuario() {}
@@ -83,28 +83,34 @@ public class Usuario {
         if (filmesFavoritos == null) {
             this.filmesFavoritos = new ArrayList<>();
         }
-        filmesFavoritos.add(new FilmeFavorito(tmdbFilme));
+        filmesFavoritos.add(new FilmeFavorito(tmdbFilme, this));
     }
 
     public void addSerieFavorita(TmdbSerie tmdbSerie) {
         if (seriesFavoritas == null) {
             this.seriesFavoritas = new ArrayList<>();
         }
-        seriesFavoritas.add(new SerieFavorita(tmdbSerie));
+        seriesFavoritas.add(new SerieFavorita(tmdbSerie, this));
     }
 
-    public void removeSerieFavorita(TmdbSerie tmdbSerie) {
-        this.seriesFavoritas.removeIf(
-                serieFavorita ->
-                        serieFavorita.getTmdbSerie().equals(tmdbSerie)
-        );
+    public void removeSerieFavorita(Long id) {
+        SerieFavorita serieFavorita = seriesFavoritas.stream()
+                .filter(serie ->
+                        Objects.equals(serie.getTmdbId(), id))
+                .findFirst()
+                .orElse(null);
+
+        seriesFavoritas.remove(serieFavorita);
     }
 
-    public void removeFilmeFavorito(TmdbFilme tmdbFilme) {
-        this.filmesFavoritos.removeIf(
-                filmeFavorito ->
-                        filmeFavorito.getTmdbFilme().equals(tmdbFilme)
-        );
+    public void removeFilmeFavorito(Long id) {
+        FilmeFavorito filmeFavorito = filmesFavoritos.stream()
+                .filter(filme ->
+                        Objects.equals(filme.getTmdbId(), id))
+                .findFirst()
+                .orElse(null);
+
+        filmesFavoritos.remove(filmeFavorito);
     }
 
     public void setSeriesFavoritas(List<SerieFavorita> seriesFavoritas) {
