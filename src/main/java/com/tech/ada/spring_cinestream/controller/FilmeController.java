@@ -24,12 +24,4 @@ public class FilmeController {
     ) {
         return filmeService.buscarFilmePorTitulo(titulo, page);
     }
-
-    @PostMapping("/favorito")
-    @ResponseStatus(HttpStatus.CREATED)
-    public void adicionarFilmeFavorito(
-            @RequestBody FilmeFavoritoRequest filmeFavoritoRequest
-            ) throws NotFoundException {
-        filmeService.adicionarFilmeFavorito(filmeFavoritoRequest);
-    }
 }

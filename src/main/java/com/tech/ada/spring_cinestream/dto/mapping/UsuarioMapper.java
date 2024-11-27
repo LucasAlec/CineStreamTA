@@ -5,11 +5,14 @@ import com.tech.ada.spring_cinestream.client.tmdbapi.dto.response.TmdbSerie;
 import com.tech.ada.spring_cinestream.dto.request.UsuarioRequest;
 import com.tech.ada.spring_cinestream.dto.response.UsuarioResponse;
 import com.tech.ada.spring_cinestream.model.Usuario;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-
+@Component
 public class UsuarioMapper {
 
     public Usuario toEntity(UsuarioRequest dto) {
@@ -18,6 +21,8 @@ public class UsuarioMapper {
         usuario.setUsername(dto.getUsername());
         usuario.setEmail(dto.getEmail());
         usuario.setSenha(dto.getSenha());
+        usuario.setFilmesFavoritos(new ArrayList<>());
+        usuario.setSeriesFavoritas(new ArrayList<>());
         return usuario;
     }
 

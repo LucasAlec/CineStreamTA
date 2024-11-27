@@ -1,10 +1,13 @@
 package com.tech.ada.spring_cinestream.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.tech.ada.spring_cinestream.client.tmdbapi.dto.response.TmdbFilme;
 import com.tech.ada.spring_cinestream.client.tmdbapi.dto.response.TmdbSerie;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 public class Usuario {
@@ -16,6 +19,7 @@ public class Usuario {
     private String nome;
     private String username;
     private String email;
+    @JsonIgnore
     private String senha;
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -75,6 +79,34 @@ public class Usuario {
         return seriesFavoritas.stream().map(SerieFavorita::getTmdbSerie).toList();
     }
 
+    public void addFilmeFavorito(TmdbFilme tmdbFilme) {
+        if (filmesFavoritos == null) {
+            this.filmesFavoritos = new ArrayList<>();
+        }
+        filmesFavoritos.add(new FilmeFavorito(tmdbFilme));
+    }
+
+    public void addSerieFavorita(TmdbSerie tmdbSerie) {
+        if (seriesFavoritas == null) {
+            this.seriesFavoritas = new ArrayList<>();
+        }
+        seriesFavoritas.add(new SerieFavorita(tmdbSerie));
+    }
+
+    public void removeSerieFavorita(TmdbSerie tmdbSerie) {
+        this.seriesFavoritas.removeIf(
+                serieFavorita ->
+                        serieFavorita.getTmdbSerie().equals(tmdbSerie)
+        );
+    }
+
+    public void removeFilmeFavorito(TmdbFilme tmdbFilme) {
+        this.filmesFavoritos.removeIf(
+                filmeFavorito ->
+                        filmeFavorito.getTmdbFilme().equals(tmdbFilme)
+        );
+    }
+
     public void setSeriesFavoritas(List<SerieFavorita> seriesFavoritas) {
         this.seriesFavoritas = seriesFavoritas;
     }
@@ -84,4 +116,18 @@ public class Usuario {
     }
 
     public void setFilmesFavoritos(List<FilmeFavorito> filmesFavoritos) {this.filmesFavoritos = filmesFavoritos;}
+
+    public boolean filmeJaEFavorito(Long id) {
+        return filmesFavoritos.stream()
+                .anyMatch(filmeFavorito ->
+                        Objects.equals(filmeFavorito.getTmdbFilme().getId(), id)
+                );
+    }
+
+    public boolean serieJaEFavorita(Long id) {
+        return seriesFavoritas.stream()
+                .anyMatch(serieFavorita ->
+                        Objects.equals(serieFavorita.getTmdbSerie().getId(), id)
+                );
+    }
 }

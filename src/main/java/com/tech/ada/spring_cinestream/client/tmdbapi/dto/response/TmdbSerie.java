@@ -6,6 +6,7 @@ import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Embeddable;
 
 import java.util.List;
+import java.util.Objects;
 
 
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
@@ -13,7 +14,7 @@ import java.util.List;
 public class TmdbSerie {
     @ElementCollection
     private List<Integer> genreIds;
-    private Integer id;
+    private Long id;
     private String name;
     private String overview;
     private String firstAirDate;
@@ -23,7 +24,7 @@ public class TmdbSerie {
 
     public TmdbSerie() {}
 
-    public TmdbSerie(List<Integer> genreIds, Integer id, String name, String overview, String firstAirDate, double voteAverage, Integer voteCount, String posterPath) {
+    public TmdbSerie(List<Integer> genreIds, Long id, String name, String overview, String firstAirDate, double voteAverage, Integer voteCount, String posterPath) {
         this.genreIds = genreIds;
         this.id = id;
         this.name = name;
@@ -42,11 +43,11 @@ public class TmdbSerie {
         this.genreIds = genreIds;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -96,5 +97,16 @@ public class TmdbSerie {
 
     public void setPosterPath(String posterPath) {
         this.posterPath = posterPath;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof TmdbSerie tmdbSerie)) return false;
+        return Objects.equals(id, tmdbSerie.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
     }
 }

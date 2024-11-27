@@ -4,6 +4,8 @@ import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import jakarta.persistence.Embeddable;
 
+import java.util.Objects;
+
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 @Embeddable
 public class TmdbFilme {
@@ -71,5 +73,16 @@ public class TmdbFilme {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof TmdbFilme tmdbFilme)) return false;
+        return Objects.equals(id, tmdbFilme.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
     }
 }

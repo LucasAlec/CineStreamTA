@@ -7,11 +7,13 @@ import com.tech.ada.spring_cinestream.dto.mapping.UsuarioMapper;
 import com.tech.ada.spring_cinestream.dto.request.UsuarioRequest;
 import com.tech.ada.spring_cinestream.dto.response.UsuarioResponse;
 import com.tech.ada.spring_cinestream.exception.AlreadyExistsException;
+import com.tech.ada.spring_cinestream.exception.AlreadyFavouriteException;
 import com.tech.ada.spring_cinestream.exception.NotFoundException;
 import com.tech.ada.spring_cinestream.model.Usuario;
 import com.tech.ada.spring_cinestream.repository.UsuarioRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -21,16 +23,18 @@ public class UsuarioService {
     private final UsuarioRepository usuarioRepository;
     private final UsuarioMapper usuarioMapper;
     private final BCryptPasswordEncoder passwordEncoder;
+    private final ApiClient tmdbClient;
 
-    public UsuarioService(UsuarioRepository usuarioRepository) {
+    public UsuarioService(UsuarioRepository usuarioRepository, UsuarioMapper usuarioMapper, BCryptPasswordEncoder passwordEncoder, ApiClient tmdbClient) {
         this.usuarioRepository = usuarioRepository;
-        this.usuarioMapper = new UsuarioMapper();
-        this.passwordEncoder = new BCryptPasswordEncoder();
+        this.usuarioMapper = usuarioMapper;
+        this.passwordEncoder = passwordEncoder;
+        this.tmdbClient = tmdbClient;
     }
 
-    public UsuarioResponse criar(UsuarioRequest usuarioRequest) throws AlreadyExistsException {
-        Optional<Usuario> optionalUsuario = usuarioRepository.findByEmail(usuarioRequest.getEmail());
-        if (optionalUsuario.isPresent()) {
+    @Transactional
+    public Usuario criar(UsuarioRequest usuarioRequest) throws AlreadyExistsException {
+        if (usuarioRepository.existsUsuarioByEmail(usuarioRequest.getEmail())) {
             throw new AlreadyExistsException(String.format(
                     "E-mail '%s' já cadastrado",
                     usuarioRequest.getEmail()
@@ -39,9 +43,8 @@ public class UsuarioService {
 
         Usuario usuario = usuarioMapper.toEntity(usuarioRequest);
         usuario.setSenha(passwordEncoder.encode(usuarioRequest.getSenha()));
-        Usuario usuarioSalvo = usuarioRepository.save(usuario);
 
-        return usuarioMapper.toDTO(usuarioSalvo);
+        return usuarioRepository.save(usuario);
     }
 
     public UsuarioResponse buscarPorEmail(String email) throws NotFoundException {
@@ -72,5 +75,37 @@ public class UsuarioService {
     public Usuario buscarUsuarioPorEmail(String email) throws NotFoundException {
         return usuarioRepository.findByEmail(email)
                 .orElseThrow(() -> new NotFoundException("Email " + email + " não encontrado"));
+    }
+
+    @Transactional
+    public void favoritarFilme(Long id, Usuario usuario) throws AlreadyFavouriteException {
+        TmdbFilme tmdbFilme = tmdbClient.buscarDetalhesFilme(id);
+        if (usuario.filmeJaEFavorito(id)) throw new AlreadyFavouriteException();
+        usuario.addFilmeFavorito(tmdbFilme);
+        usuarioRepository.save(usuario);
+    }
+
+    @Transactional
+    public void removerFilmeFavorito(Long id, Usuario usuario) throws NotFoundException {
+        TmdbFilme tmdbFilme = tmdbClient.buscarDetalhesFilme(id);
+        if (!usuario.filmeJaEFavorito(id)) throw new NotFoundException();
+        usuario.removeFilmeFavorito(tmdbFilme);
+        usuarioRepository.save(usuario);
+    }
+
+    @Transactional
+    public void favoritarSerie(Long id, Usuario usuario) throws AlreadyFavouriteException {
+        TmdbSerie tmdbSerie = tmdbClient.buscarDetalhesSerie(id);
+        if (usuario.serieJaEFavorita(id)) throw new AlreadyFavouriteException();
+        usuario.addSerieFavorita(tmdbSerie);
+        usuarioRepository.save(usuario);
+    }
+
+    @Transactional
+    public void removerSerieFavorita(Long id, Usuario usuario) throws NotFoundException {
+        TmdbSerie tmdbSerie = tmdbClient.buscarDetalhesSerie(id);
+        if (!usuario.serieJaEFavorita(id)) throw new NotFoundException();
+        usuario.removeSerieFavorita(tmdbSerie);
+        usuarioRepository.save(usuario);
     }
 }

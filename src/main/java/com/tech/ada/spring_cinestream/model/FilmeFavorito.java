@@ -11,6 +11,9 @@ public class FilmeFavorito {
     private Long id;
 
     @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "id", column = @Column(name = "tmdb_id"))
+    })
     private TmdbFilme tmdbFilme;
 
     @ManyToOne
@@ -19,6 +22,10 @@ public class FilmeFavorito {
     private Usuario usuario;
 
     public FilmeFavorito() {}
+
+    public FilmeFavorito(TmdbFilme tmdbFilme) {
+        this.tmdbFilme = tmdbFilme;
+    }
 
     public Long getId() {
         return id;

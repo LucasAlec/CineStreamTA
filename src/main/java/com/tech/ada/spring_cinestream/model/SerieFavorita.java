@@ -11,6 +11,9 @@ public class SerieFavorita {
     private Long id;
 
     @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "id", column = @Column(name = "tmdb_id"))
+    })
     private TmdbSerie tmdbSerie;
 
     @ManyToOne
@@ -19,6 +22,10 @@ public class SerieFavorita {
     private Usuario usuario;
 
     public SerieFavorita() {}
+
+    public SerieFavorita(TmdbSerie tmdbSerie) {
+        this.tmdbSerie = tmdbSerie;
+    }
 
     public Long getId() {
         return id;

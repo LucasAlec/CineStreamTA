@@ -25,13 +25,4 @@ public class SerieController {
     ) {
         return serieService.buscarSeriePorTitulo(titulo, page);
     }
-
-    @PostMapping("/favorita")
-    @ResponseStatus(HttpStatus.CREATED)
-    public void adicionarSerieFavorita(
-            @RequestBody SerieFavoritaRequest serieFavoritaRequest
-            ) throws NotFoundException {
-        serieService.adicionarSerieFavorita(serieFavoritaRequest);
-    }
-
 }

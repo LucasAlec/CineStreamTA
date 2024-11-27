@@ -2,6 +2,7 @@ package com.tech.ada.spring_cinestream.config;
 
 import com.tech.ada.spring_cinestream.model.Usuario;
 import com.tech.ada.spring_cinestream.exception.NotFoundException;
+import com.tech.ada.spring_cinestream.repository.UsuarioRepository;
 import com.tech.ada.spring_cinestream.service.JWTService;
 import com.tech.ada.spring_cinestream.service.UsuarioService;
 import jakarta.servlet.FilterChain;
@@ -18,17 +19,18 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.Collections;
+import java.util.Optional;
 
 @Component
 public class SecurityFilter extends OncePerRequestFilter {
 
     private final JWTService jwtService;
-    private final UsuarioService usuarioService;
+    private final UsuarioRepository usuarioRepository;
     private static final Logger logger = LoggerFactory.getLogger(SecurityFilter.class);
 
-    public SecurityFilter(JWTService jwtService, UsuarioService usuarioService) {
+    public SecurityFilter(JWTService jwtService, UsuarioRepository usuarioRepository) {
         this.jwtService = jwtService;
-        this.usuarioService = usuarioService;
+        this.usuarioRepository = usuarioRepository;
     }
 
     @Override
@@ -41,9 +43,10 @@ public class SecurityFilter extends OncePerRequestFilter {
 
             if (login.isPresent()) {
                 try {
-                    Usuario usuario = usuarioService.buscarUsuarioPorEmail(login.get());
+                    Optional<Usuario> usuario = usuarioRepository.findByEmail(login.get());
+                    if (usuario.isEmpty()) throw new NotFoundException();
                     var authorities = Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER"));
-                    var authentication = new UsernamePasswordAuthenticationToken(usuario, null, authorities);
+                    var authentication = new UsernamePasswordAuthenticationToken(usuario.get(), null, authorities);
                     SecurityContextHolder.getContext().setAuthentication(authentication);
                 } catch (NotFoundException e) {
                     logger.error("Usuário não encontrado para o email: {}", login.get(), e);
@@ -60,7 +63,7 @@ public class SecurityFilter extends OncePerRequestFilter {
     protected boolean shouldNotFilter(HttpServletRequest request) {
         String path = request.getServletPath();
 
-        return path.startsWith("/email") ||
+        return path.startsWith("/login") ||
                 path.startsWith("/register") ||
                 path.startsWith("/h2") ||
                 path.startsWith("/usuario/");
