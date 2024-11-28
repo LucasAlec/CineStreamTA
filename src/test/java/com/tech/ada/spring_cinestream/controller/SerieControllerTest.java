@@ -12,6 +12,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.Arrays;
+import java.util.List;
 
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -25,8 +26,6 @@ public class SerieControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-    @Autowired
-    private ObjectMapper objectMapper;
 
     @MockBean
     SerieService serieService;
@@ -84,4 +83,24 @@ public class SerieControllerTest {
                 .andExpect(jsonPath("$.total_results").value(0));
     }
 
+
+    @Test
+    public void dadoPageNaoInformado_quandoBuscarPorTitulo_entaoUsaPagePadrao() throws Exception {
+        // Dado
+        String titulo = "Stranger Things";
+        Integer page = 1;
+
+        TmdbSerie serie = new TmdbSerie(Arrays.asList(1, 2), 1L, "Stranger Things", "Sinopse", "2016-07-15", 8.7, 2000, "/poster.jpg");
+        Page<TmdbSerie> paginaDeSeries = new Page<>(1, List.of(serie), 1, 10);
+
+        when(serieService.buscarSeriePorTitulo(titulo, page)).thenReturn(paginaDeSeries);
+
+        // Quando
+        mockMvc.perform(get("/api/series")
+                        .param("titulo", titulo))
+                // Então
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.results[0].name").value("Stranger Things"))
+                .andExpect(jsonPath("$.page").value(page));
+    }
 }

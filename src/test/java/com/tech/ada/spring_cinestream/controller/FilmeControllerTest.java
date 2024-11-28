@@ -24,8 +24,6 @@ public class FilmeControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-    @Autowired
-    private ObjectMapper objectMapper;
 
     @MockBean
     private FilmeService filmeService;
