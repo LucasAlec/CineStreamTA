@@ -50,14 +50,6 @@ public class ApiClient {
         );
     }
 
-    @Cacheable("generosFilmes")
-    public TmdbListaGeneros generosFilmes() {
-        return makeApiCall(
-                "/genre/movie/list",
-                getParams(),
-                TmdbListaGeneros.class
-        );
-    }
 
     public Page<TmdbFilme> buscarFilmesPorAnoLancamento(String ano, Integer page) {
         return makeApiCall(
@@ -81,11 +73,6 @@ public class ApiClient {
                 )),
                 new ParameterizedTypeReference<>() {}
                 );
-    }
-
-    @Cacheable("generosSeries")
-    public TmdbListaGeneros generosSeries() {
-        return makeApiCall("/genre/tv/list", getParams(), TmdbListaGeneros.class);
     }
 
     public Page<TmdbSerie> buscarSeriesPorAnoLancamento(String ano, Integer page) {

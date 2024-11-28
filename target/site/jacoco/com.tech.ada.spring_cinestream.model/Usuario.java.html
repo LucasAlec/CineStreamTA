@@ -30,12 +30,12 @@ public class Usuario {
 
 <span class="fc" id="L31">    public Usuario() {}</span>
 
-<span class="nc" id="L33">    public Usuario(String nome, String username, String email, String senha) {</span>
-<span class="nc" id="L34">        this.nome = nome;</span>
-<span class="nc" id="L35">        this.username = username;</span>
-<span class="nc" id="L36">        this.email = email;</span>
-<span class="nc" id="L37">        this.senha = senha;</span>
-<span class="nc" id="L38">    }</span>
+<span class="fc" id="L33">    public Usuario(String nome, String username, String email, String senha) {</span>
+<span class="fc" id="L34">        this.nome = nome;</span>
+<span class="fc" id="L35">        this.username = username;</span>
+<span class="fc" id="L36">        this.email = email;</span>
+<span class="fc" id="L37">        this.senha = senha;</span>
+<span class="fc" id="L38">    }</span>
 
     public Long getId() {
 <span class="fc" id="L41">        return id;</span>
@@ -75,79 +75,72 @@ public class Usuario {
 
 <span class="fc" id="L76">    public void setUsername(String username) {this.username = username;}</span>
 
-//    public List&lt;TmdbSerie&gt; getSeriesFavoritas() {
-//        return seriesFavoritas.stream().map(SerieFavorita::getTmdbSerie).toList();
-//    }
-
     public List&lt;TmdbSerie&gt; getSeriesFavoritas() {
-<span class="pc bpc" id="L83" title="1 of 2 branches missed.">        if (seriesFavoritas == null) {</span>
-<span class="fc" id="L84">            return new ArrayList&lt;&gt;();</span>
+<span class="pc bpc" id="L79" title="1 of 2 branches missed.">        if (seriesFavoritas == null) {</span>
+<span class="fc" id="L80">            return new ArrayList&lt;&gt;();</span>
         }
-<span class="nc" id="L86">        return seriesFavoritas.stream().map(SerieFavorita::getTmdbSerie).toList();</span>
+<span class="nc" id="L82">        return seriesFavoritas.stream().map(SerieFavorita::getTmdbSerie).toList();</span>
     }
 
     public void addFilmeFavorito(TmdbFilme tmdbFilme) {
-<span class="nc bnc" id="L90" title="All 2 branches missed.">        if (filmesFavoritos == null) {</span>
-<span class="nc" id="L91">            this.filmesFavoritos = new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L86" title="All 2 branches missed.">        if (filmesFavoritos == null) {</span>
+<span class="nc" id="L87">            this.filmesFavoritos = new ArrayList&lt;&gt;();</span>
         }
-<span class="nc" id="L93">        filmesFavoritos.add(new FilmeFavorito(tmdbFilme, this));</span>
-<span class="nc" id="L94">    }</span>
+<span class="nc" id="L89">        filmesFavoritos.add(new FilmeFavorito(tmdbFilme, this));</span>
+<span class="nc" id="L90">    }</span>
 
     public void addSerieFavorita(TmdbSerie tmdbSerie) {
-<span class="nc bnc" id="L97" title="All 2 branches missed.">        if (seriesFavoritas == null) {</span>
-<span class="nc" id="L98">            this.seriesFavoritas = new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L93" title="All 2 branches missed.">        if (seriesFavoritas == null) {</span>
+<span class="nc" id="L94">            this.seriesFavoritas = new ArrayList&lt;&gt;();</span>
         }
-<span class="nc" id="L100">        seriesFavoritas.add(new SerieFavorita(tmdbSerie, this));</span>
-<span class="nc" id="L101">    }</span>
+<span class="nc" id="L96">        seriesFavoritas.add(new SerieFavorita(tmdbSerie, this));</span>
+<span class="nc" id="L97">    }</span>
 
     public void removeSerieFavorita(Long id) {
-<span class="nc" id="L104">        SerieFavorita serieFavorita = seriesFavoritas.stream()</span>
-<span class="nc" id="L105">                .filter(serie -&gt;</span>
-<span class="nc" id="L106">                        Objects.equals(serie.getTmdbId(), id))</span>
-<span class="nc" id="L107">                .findFirst()</span>
-<span class="nc" id="L108">                .orElse(null);</span>
+<span class="nc" id="L100">        SerieFavorita serieFavorita = seriesFavoritas.stream()</span>
+<span class="nc" id="L101">                .filter(serie -&gt;</span>
+<span class="nc" id="L102">                        Objects.equals(serie.getTmdbId(), id))</span>
+<span class="nc" id="L103">                .findFirst()</span>
+<span class="nc" id="L104">                .orElse(null);</span>
 
-<span class="nc" id="L110">        seriesFavoritas.remove(serieFavorita);</span>
-<span class="nc" id="L111">    }</span>
+<span class="nc" id="L106">        seriesFavoritas.remove(serieFavorita);</span>
+<span class="nc" id="L107">    }</span>
 
     public void removeFilmeFavorito(Long id) {
-<span class="nc" id="L114">        FilmeFavorito filmeFavorito = filmesFavoritos.stream()</span>
-<span class="nc" id="L115">                .filter(filme -&gt;</span>
-<span class="nc" id="L116">                        Objects.equals(filme.getTmdbId(), id))</span>
-<span class="nc" id="L117">                .findFirst()</span>
-<span class="nc" id="L118">                .orElse(null);</span>
+<span class="nc" id="L110">        FilmeFavorito filmeFavorito = filmesFavoritos.stream()</span>
+<span class="nc" id="L111">                .filter(filme -&gt;</span>
+<span class="nc" id="L112">                        Objects.equals(filme.getTmdbId(), id))</span>
+<span class="nc" id="L113">                .findFirst()</span>
+<span class="nc" id="L114">                .orElse(null);</span>
 
-<span class="nc" id="L120">        filmesFavoritos.remove(filmeFavorito);</span>
-<span class="nc" id="L121">    }</span>
+<span class="nc" id="L116">        filmesFavoritos.remove(filmeFavorito);</span>
+<span class="nc" id="L117">    }</span>
 
     public void setSeriesFavoritas(List&lt;SerieFavorita&gt; seriesFavoritas) {
-<span class="nc" id="L124">        this.seriesFavoritas = seriesFavoritas;</span>
-<span class="nc" id="L125">    }</span>
+<span class="nc" id="L120">        this.seriesFavoritas = seriesFavoritas;</span>
+<span class="nc" id="L121">    }</span>
 
-//    public List&lt;TmdbFilme&gt; getFilmesFavoritos() {
-//        return filmesFavoritos.stream().map(FilmeFavorito::getTmdbFilme).toList();
-//    }
 
     public List&lt;TmdbFilme&gt; getFilmesFavoritos() {
-<span class="pc bpc" id="L132" title="1 of 2 branches missed.">        if (filmesFavoritos == null) {</span>
-<span class="fc" id="L133">            return new ArrayList&lt;&gt;();</span>
+<span class="pc bpc" id="L125" title="1 of 2 branches missed.">        if (filmesFavoritos == null) {</span>
+<span class="fc" id="L126">            return new ArrayList&lt;&gt;();</span>
         }
-<span class="nc" id="L135">        return filmesFavoritos.stream().map(FilmeFavorito::getTmdbFilme).toList();</span>
+<span class="nc" id="L128">        return filmesFavoritos.stream().map(FilmeFavorito::getTmdbFilme).toList();</span>
     }
 
-<span class="nc" id="L138">    public void setFilmesFavoritos(List&lt;FilmeFavorito&gt; filmesFavoritos) {this.filmesFavoritos = filmesFavoritos;}</span>
+<span class="nc" id="L131">    public void setFilmesFavoritos(List&lt;FilmeFavorito&gt; filmesFavoritos) {this.filmesFavoritos = filmesFavoritos;}</span>
 
     public boolean filmeJaEFavorito(Long id) {
-<span class="nc" id="L141">        return filmesFavoritos.stream()</span>
-<span class="nc" id="L142">                .anyMatch(filmeFavorito -&gt;</span>
-<span class="nc" id="L143">                        Objects.equals(filmeFavorito.getTmdbFilme().getId(), id)</span>
+<span class="nc" id="L134">        return filmesFavoritos.stream()</span>
+<span class="nc" id="L135">                .anyMatch(filmeFavorito -&gt;</span>
+<span class="nc" id="L136">                        Objects.equals(filmeFavorito.getTmdbFilme().getId(), id)</span>
                 );
     }
 
     public boolean serieJaEFavorita(Long id) {
-<span class="nc" id="L148">        return seriesFavoritas.stream()</span>
-<span class="nc" id="L149">                .anyMatch(serieFavorita -&gt;</span>
-<span class="nc" id="L150">                        Objects.equals(serieFavorita.getTmdbSerie().getId(), id)</span>
+<span class="nc" id="L141">        return seriesFavoritas.stream()</span>
+<span class="nc" id="L142">                .anyMatch(serieFavorita -&gt;</span>
+<span class="nc" id="L143">                        Objects.equals(serieFavorita.getTmdbSerie().getId(), id)</span>
                 );
     }
 }
