@@ -25,12 +25,12 @@ public class UsuarioService {
     private final BCryptPasswordEncoder passwordEncoder;
     private final ApiClient tmdbClient;
 
-<span class="nc" id="L28">    public UsuarioService(UsuarioRepository usuarioRepository, UsuarioMapper usuarioMapper, BCryptPasswordEncoder passwordEncoder, ApiClient tmdbClient) {</span>
-<span class="nc" id="L29">        this.usuarioRepository = usuarioRepository;</span>
-<span class="nc" id="L30">        this.usuarioMapper = usuarioMapper;</span>
-<span class="nc" id="L31">        this.passwordEncoder = passwordEncoder;</span>
-<span class="nc" id="L32">        this.tmdbClient = tmdbClient;</span>
-<span class="nc" id="L33">    }</span>
+<span class="fc" id="L28">    public UsuarioService(UsuarioRepository usuarioRepository, UsuarioMapper usuarioMapper, BCryptPasswordEncoder passwordEncoder, ApiClient tmdbClient) {</span>
+<span class="fc" id="L29">        this.usuarioRepository = usuarioRepository;</span>
+<span class="fc" id="L30">        this.usuarioMapper = usuarioMapper;</span>
+<span class="fc" id="L31">        this.passwordEncoder = passwordEncoder;</span>
+<span class="fc" id="L32">        this.tmdbClient = tmdbClient;</span>
+<span class="fc" id="L33">    }</span>
 
     @Transactional
     public Usuario criar(UsuarioRequest usuarioRequest) throws AlreadyExistsException {

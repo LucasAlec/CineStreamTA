@@ -3,6 +3,7 @@ package com.tech.ada.spring_cinestream.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tech.ada.spring_cinestream.dto.request.LoginRequest;
 import com.tech.ada.spring_cinestream.dto.request.UsuarioRequest;
+import com.tech.ada.spring_cinestream.exception.AlreadyExistsException;
 import com.tech.ada.spring_cinestream.model.Usuario;
 import com.tech.ada.spring_cinestream.service.JWTService;
 import com.tech.ada.spring_cinestream.service.UsuarioService;
@@ -115,8 +116,5 @@ public class AuthControllerTest {
                 .andExpect(jsonPath("$.username").value("vivianemendes"))
                 .andExpect(jsonPath("$.email").value("viviane@gmail.com"));
     }
-
-
-
 
 }

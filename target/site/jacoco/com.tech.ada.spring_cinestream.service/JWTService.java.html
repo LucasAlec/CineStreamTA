@@ -20,13 +20,13 @@ import java.util.Optional;
 public class JWTService {
 
     private final TokenRepository tokenRepository;
-<span class="nc" id="L23">    private final String ISSUER = &quot;CineStream&quot;;</span>
+<span class="fc" id="L23">    private final String ISSUER = &quot;CineStream&quot;;</span>
     private final Algorithm algorithm;
 
-<span class="nc" id="L26">    public JWTService(@Value(&quot;${jwt.secret}&quot;) String secretKey, TokenRepository tokenRepository) {</span>
-<span class="nc" id="L27">        this.tokenRepository = tokenRepository;</span>
-<span class="nc" id="L28">        this.algorithm = Algorithm.HMAC256(secretKey);</span>
-<span class="nc" id="L29">    }</span>
+<span class="fc" id="L26">    public JWTService(@Value(&quot;${jwt.secret}&quot;) String secretKey, TokenRepository tokenRepository) {</span>
+<span class="fc" id="L27">        this.tokenRepository = tokenRepository;</span>
+<span class="fc" id="L28">        this.algorithm = Algorithm.HMAC256(secretKey);</span>
+<span class="fc" id="L29">    }</span>
 
     public Optional&lt;TokenResult&gt; getToken(String token) {
 <span class="nc" id="L32">        Optional&lt;Token&gt; tokenEntityOptional = tokenRepository.findByToken(token);</span>
