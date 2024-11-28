@@ -18,6 +18,9 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
 import java.util.Optional;
 
 @SpringBootTest
@@ -79,6 +82,40 @@ public class AuthControllerTest {
                 .andExpect(MockMvcResultMatchers.status().isUnauthorized())
                 .andExpect(MockMvcResultMatchers.content().string("Email ou senha incorretos"));
     }
+
+
+    @Test
+    public void dadoUsuarioValido_quandoRegistrar_entaoRetornaUsuarioCriado() throws Exception {
+        // Dado
+        UsuarioRequest usuarioRequest = new UsuarioRequest();
+        usuarioRequest.setNome("Viviane");
+        usuarioRequest.setUsername("vivianemendes");
+        usuarioRequest.setEmail("viviane@gmail.com");
+        usuarioRequest.setSenha("senha123");
+
+        Usuario novoUsuario = new Usuario();
+        novoUsuario.setNome("Viviane");
+        novoUsuario.setUsername("vivianemendes");
+        novoUsuario.setEmail("viviane@gmail.com");
+
+        Mockito.when(usuarioService.criar(Mockito.any(UsuarioRequest.class)))
+                .thenReturn(novoUsuario);
+
+        // Quando
+        mockMvc.perform(
+                        MockMvcRequestBuilders.post("/register")
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .content(objectMapper.writeValueAsString(usuarioRequest))
+                )
+                // Então
+                .andDo(print())
+                .andExpect(status().isCreated())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.nome").value("Viviane"))
+                .andExpect(jsonPath("$.username").value("vivianemendes"))
+                .andExpect(jsonPath("$.email").value("viviane@gmail.com"));
+    }
+
 
 
 

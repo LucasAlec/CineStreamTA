@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Usuario.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">spring-cinestream</a> &gt; <a href="index.source.html" class="el_package">com.tech.ada.spring_cinestream.model</a> &gt; <span class="el_source">Usuario.java</span></div><h1>Usuario.java</h1><pre class="source lang-java linenums">package com.tech.ada.spring_cinestream.model;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.tech.ada.spring_cinestream.client.tmdbapi.dto.response.TmdbFilme;
+import com.tech.ada.spring_cinestream.client.tmdbapi.dto.response.TmdbSerie;
+import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
+@Entity
+public class Usuario {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String nome;
+    private String username;
+    private String email;
+    @JsonIgnore
+    private String senha;
+
+    @OneToMany(mappedBy = &quot;usuario&quot;, cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    private List&lt;FilmeFavorito&gt; filmesFavoritos;
+
+    @OneToMany(mappedBy = &quot;usuario&quot;, cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    private List&lt;SerieFavorita&gt; seriesFavoritas;
+
+<span class="fc" id="L31">    public Usuario() {}</span>
+
+<span class="nc" id="L33">    public Usuario(String nome, String username, String email, String senha) {</span>
+<span class="nc" id="L34">        this.nome = nome;</span>
+<span class="nc" id="L35">        this.username = username;</span>
+<span class="nc" id="L36">        this.email = email;</span>
+<span class="nc" id="L37">        this.senha = senha;</span>
+<span class="nc" id="L38">    }</span>
+
+    public Long getId() {
+<span class="nc" id="L41">        return id;</span>
+    }
+
+    public void setId(Long id) {
+<span class="nc" id="L45">        this.id = id;</span>
+<span class="nc" id="L46">    }</span>
+
+    public String getNome() {
+<span class="nc" id="L49">        return nome;</span>
+    }
+
+    public void setNome(String nome) {
+<span class="nc" id="L53">        this.nome = nome;</span>
+<span class="nc" id="L54">    }</span>
+
+    public String getEmail() {
+<span class="fc" id="L57">        return email;</span>
+    }
+
+    public void setEmail(String email) {
+<span class="fc" id="L61">        this.email = email;</span>
+<span class="fc" id="L62">    }</span>
+
+    public String getSenha() {
+<span class="nc" id="L65">        return senha;</span>
+    }
+
+    public void setSenha(String senha) {
+<span class="nc" id="L69">        this.senha = senha;</span>
+<span class="nc" id="L70">    }</span>
+
+    public String getUsername() {
+<span class="nc" id="L73">        return username;</span>
+    }
+
+<span class="nc" id="L76">    public void setUsername(String username) {this.username = username;}</span>
+
+    public List&lt;TmdbSerie&gt; getSeriesFavoritas() {
+<span class="nc" id="L79">        return seriesFavoritas.stream().map(SerieFavorita::getTmdbSerie).toList();</span>
+    }
+
+    public void addFilmeFavorito(TmdbFilme tmdbFilme) {
+<span class="nc bnc" id="L83" title="All 2 branches missed.">        if (filmesFavoritos == null) {</span>
+<span class="nc" id="L84">            this.filmesFavoritos = new ArrayList&lt;&gt;();</span>
+        }
+<span class="nc" id="L86">        filmesFavoritos.add(new FilmeFavorito(tmdbFilme, this));</span>
+<span class="nc" id="L87">    }</span>
+
+    public void addSerieFavorita(TmdbSerie tmdbSerie) {
+<span class="nc bnc" id="L90" title="All 2 branches missed.">        if (seriesFavoritas == null) {</span>
+<span class="nc" id="L91">            this.seriesFavoritas = new ArrayList&lt;&gt;();</span>
+        }
+<span class="nc" id="L93">        seriesFavoritas.add(new SerieFavorita(tmdbSerie, this));</span>
+<span class="nc" id="L94">    }</span>
+
+    public void removeSerieFavorita(Long id) {
+<span class="nc" id="L97">        SerieFavorita serieFavorita = seriesFavoritas.stream()</span>
+<span class="nc" id="L98">                .filter(serie -&gt;</span>
+<span class="nc" id="L99">                        Objects.equals(serie.getTmdbId(), id))</span>
+<span class="nc" id="L100">                .findFirst()</span>
+<span class="nc" id="L101">                .orElse(null);</span>
+
+<span class="nc" id="L103">        seriesFavoritas.remove(serieFavorita);</span>
+<span class="nc" id="L104">    }</span>
+
+    public void removeFilmeFavorito(Long id) {
+<span class="nc" id="L107">        FilmeFavorito filmeFavorito = filmesFavoritos.stream()</span>
+<span class="nc" id="L108">                .filter(filme -&gt;</span>
+<span class="nc" id="L109">                        Objects.equals(filme.getTmdbId(), id))</span>
+<span class="nc" id="L110">                .findFirst()</span>
+<span class="nc" id="L111">                .orElse(null);</span>
+
+<span class="nc" id="L113">        filmesFavoritos.remove(filmeFavorito);</span>
+<span class="nc" id="L114">    }</span>
+
+    public void setSeriesFavoritas(List&lt;SerieFavorita&gt; seriesFavoritas) {
+<span class="nc" id="L117">        this.seriesFavoritas = seriesFavoritas;</span>
+<span class="nc" id="L118">    }</span>
+
+    public List&lt;TmdbFilme&gt; getFilmesFavoritos() {
+<span class="nc" id="L121">        return filmesFavoritos.stream().map(FilmeFavorito::getTmdbFilme).toList();</span>
+    }
+
+<span class="nc" id="L124">    public void setFilmesFavoritos(List&lt;FilmeFavorito&gt; filmesFavoritos) {this.filmesFavoritos = filmesFavoritos;}</span>
+
+    public boolean filmeJaEFavorito(Long id) {
+<span class="nc" id="L127">        return filmesFavoritos.stream()</span>
+<span class="nc" id="L128">                .anyMatch(filmeFavorito -&gt;</span>
+<span class="nc" id="L129">                        Objects.equals(filmeFavorito.getTmdbFilme().getId(), id)</span>
+                );
+    }
+
+    public boolean serieJaEFavorita(Long id) {
+<span class="nc" id="L134">        return seriesFavoritas.stream()</span>
+<span class="nc" id="L135">                .anyMatch(serieFavorita -&gt;</span>
+<span class="nc" id="L136">                        Objects.equals(serieFavorita.getTmdbSerie().getId(), id)</span>
+                );
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

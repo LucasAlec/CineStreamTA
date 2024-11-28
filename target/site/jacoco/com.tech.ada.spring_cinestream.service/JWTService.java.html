@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>JWTService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">spring-cinestream</a> &gt; <a href="index.source.html" class="el_package">com.tech.ada.spring_cinestream.service</a> &gt; <span class="el_source">JWTService.java</span></div><h1>JWTService.java</h1><pre class="source lang-java linenums">package com.tech.ada.spring_cinestream.service;
+
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.exceptions.JWTCreationException;
+import com.tech.ada.spring_cinestream.exception.AuthenticationFailedException;
+import com.tech.ada.spring_cinestream.model.Usuario;
+import com.tech.ada.spring_cinestream.repository.TokenRepository;
+import com.tech.ada.spring_cinestream.model.Token;
+import com.tech.ada.spring_cinestream.dto.token.TokenResult;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.util.Optional;
+
+@Service
+public class JWTService {
+
+    private final TokenRepository tokenRepository;
+<span class="nc" id="L23">    private final String ISSUER = &quot;CineStream&quot;;</span>
+    private final Algorithm algorithm;
+
+<span class="nc" id="L26">    public JWTService(@Value(&quot;${jwt.secret}&quot;) String secretKey, TokenRepository tokenRepository) {</span>
+<span class="nc" id="L27">        this.tokenRepository = tokenRepository;</span>
+<span class="nc" id="L28">        this.algorithm = Algorithm.HMAC256(secretKey);</span>
+<span class="nc" id="L29">    }</span>
+
+    public Optional&lt;TokenResult&gt; getToken(String token) {
+<span class="nc" id="L32">        Optional&lt;Token&gt; tokenEntityOptional = tokenRepository.findByToken(token);</span>
+
+<span class="nc bnc" id="L34" title="All 2 branches missed.">        if (tokenEntityOptional.isPresent()) {</span>
+<span class="nc" id="L35">            Token tokenEntity = tokenEntityOptional.get();</span>
+<span class="nc" id="L36">            return Optional.of(new TokenResult(tokenEntity, isExpired(tokenEntity)));</span>
+        }
+
+<span class="nc" id="L39">        return Optional.empty();</span>
+    }
+
+    public boolean isExpired(Token tokenEntity) {
+<span class="nc" id="L43">        return tokenEntity.getExpirationDate().isBefore(Instant.now());</span>
+    }
+
+    public String generateToken(Usuario user) throws AuthenticationFailedException {
+        try {
+<span class="nc" id="L48">            Instant expirationDate = generateExpirationDate();</span>
+<span class="nc" id="L49">            String token = JWT.create()</span>
+<span class="nc" id="L50">                    .withIssuer(ISSUER)</span>
+<span class="nc" id="L51">                    .withSubject(user.getEmail())</span>
+<span class="nc" id="L52">                    .withExpiresAt(expirationDate)</span>
+<span class="nc" id="L53">                    .sign(algorithm);</span>
+
+<span class="nc" id="L55">            Token tokenEntity = new Token(token, expirationDate, user);</span>
+<span class="nc" id="L56">            tokenRepository.saveAndFlush(tokenEntity);</span>
+<span class="nc" id="L57">            return token;</span>
+<span class="nc" id="L58">        } catch (JWTCreationException e) {</span>
+<span class="nc" id="L59">            throw new AuthenticationFailedException(&quot;Erro durante a autenticação.&quot;);</span>
+        }
+    }
+
+    public Optional&lt;String&gt; validateToken(String token) {
+        try {
+<span class="nc" id="L65">            Optional&lt;TokenResult&gt; tokenResultOpt = getToken(token);</span>
+<span class="nc bnc" id="L66" title="All 2 branches missed.">            if (tokenResultOpt.isPresent()) {</span>
+<span class="nc" id="L67">                TokenResult tokenResult = tokenResultOpt.get();</span>
+<span class="nc bnc" id="L68" title="All 2 branches missed.">                if (tokenResult.isExpired()) return Optional.empty();</span>
+<span class="nc" id="L69">                return Optional.ofNullable(JWT.require(algorithm)</span>
+<span class="nc" id="L70">                        .withIssuer(ISSUER)</span>
+<span class="nc" id="L71">                        .build()</span>
+<span class="nc" id="L72">                        .verify(token)</span>
+<span class="nc" id="L73">                        .getSubject());</span>
+            }
+
+<span class="nc" id="L76">            return Optional.empty();</span>
+<span class="nc" id="L77">        } catch (JWTCreationException e) {</span>
+<span class="nc" id="L78">            return Optional.empty();</span>
+        }
+    }
+
+    private Instant generateExpirationDate() {
+<span class="nc" id="L83">        return LocalDateTime.now().plusDays(7).toInstant(ZoneOffset.UTC);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>
