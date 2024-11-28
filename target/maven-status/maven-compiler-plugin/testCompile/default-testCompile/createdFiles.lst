@@ -1,2 +1,3 @@
-com\tech\ada\spring_cinestream\controller\FilmeControllerTest.class
 com\tech\ada\spring_cinestream\controller\AuthControllerTest.class
+com\tech\ada\spring_cinestream\controller\FilmeControllerTest.class
+com\tech\ada\spring_cinestream\controller\SerieControllerTest.class

@@ -75,10 +75,6 @@ public class Usuario {
 
     public void setUsername(String username) {this.username = username;}
 
-//    public List<TmdbSerie> getSeriesFavoritas() {
-//        return seriesFavoritas.stream().map(SerieFavorita::getTmdbSerie).toList();
-//    }
-
     public List<TmdbSerie> getSeriesFavoritas() {
         if (seriesFavoritas == null) {
             return new ArrayList<>();
@@ -124,9 +120,6 @@ public class Usuario {
         this.seriesFavoritas = seriesFavoritas;
     }
 
-//    public List<TmdbFilme> getFilmesFavoritos() {
-//        return filmesFavoritos.stream().map(FilmeFavorito::getTmdbFilme).toList();
-//    }
 
     public List<TmdbFilme> getFilmesFavoritos() {
         if (filmesFavoritos == null) {

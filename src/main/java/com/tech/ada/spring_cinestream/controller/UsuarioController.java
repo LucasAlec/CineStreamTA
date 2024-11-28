@@ -1,11 +1,9 @@
 package com.tech.ada.spring_cinestream.controller;
 
-import com.tech.ada.spring_cinestream.dto.response.UsuarioResponse;
 import com.tech.ada.spring_cinestream.exception.AlreadyFavouriteException;
 import com.tech.ada.spring_cinestream.exception.ApiClientException;
 import com.tech.ada.spring_cinestream.exception.NotFoundException;
 import com.tech.ada.spring_cinestream.model.Usuario;
-import com.tech.ada.spring_cinestream.repository.UsuarioRepository;
 import com.tech.ada.spring_cinestream.service.UsuarioService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
