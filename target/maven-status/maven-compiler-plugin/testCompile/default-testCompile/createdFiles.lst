@@ -1,1 +1,4 @@
-com\tech\ada\spring_cinestream\SpringCinestreamApplicationTests.class
+com/tech/ada/spring_cinestream/dto/FilmeFavoritoRequestTest.class
+com/tech/ada/spring_cinestream/SpringCinestreamApplicationTests.class
+com/tech/ada/spring_cinestream/dto/FilmeRequestTest.class
+com/tech/ada/spring_cinestream/dto/UsuarioMapperTest.class

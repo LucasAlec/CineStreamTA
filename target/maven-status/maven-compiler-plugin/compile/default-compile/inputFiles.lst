@@ -1,45 +1,46 @@
-D:\Documentos\Exercicio_Ada\Modulo 06\CineStreamTA\src\main\java\com\tech\ada\spring_cinestream\client\tmdbapi\ApiClient.java
-D:\Documentos\Exercicio_Ada\Modulo 06\CineStreamTA\src\main\java\com\tech\ada\spring_cinestream\client\tmdbapi\dto\response\Page.java
-D:\Documentos\Exercicio_Ada\Modulo 06\CineStreamTA\src\main\java\com\tech\ada\spring_cinestream\client\tmdbapi\dto\response\TmdbFilme.java
-D:\Documentos\Exercicio_Ada\Modulo 06\CineStreamTA\src\main\java\com\tech\ada\spring_cinestream\client\tmdbapi\dto\response\TmdbGenero.java
-D:\Documentos\Exercicio_Ada\Modulo 06\CineStreamTA\src\main\java\com\tech\ada\spring_cinestream\client\tmdbapi\dto\response\TmdbListaGeneros.java
-D:\Documentos\Exercicio_Ada\Modulo 06\CineStreamTA\src\main\java\com\tech\ada\spring_cinestream\client\tmdbapi\dto\response\TmdbSerie.java
-D:\Documentos\Exercicio_Ada\Modulo 06\CineStreamTA\src\main\java\com\tech\ada\spring_cinestream\config\SecurityConfig.java
-D:\Documentos\Exercicio_Ada\Modulo 06\CineStreamTA\src\main\java\com\tech\ada\spring_cinestream\config\SecurityFilter.java
-D:\Documentos\Exercicio_Ada\Modulo 06\CineStreamTA\src\main\java\com\tech\ada\spring_cinestream\controller\AdviceController.java
-D:\Documentos\Exercicio_Ada\Modulo 06\CineStreamTA\src\main\java\com\tech\ada\spring_cinestream\controller\FilmeController.java
-D:\Documentos\Exercicio_Ada\Modulo 06\CineStreamTA\src\main\java\com\tech\ada\spring_cinestream\controller\LoginController.java
-D:\Documentos\Exercicio_Ada\Modulo 06\CineStreamTA\src\main\java\com\tech\ada\spring_cinestream\controller\SerieController.java
-D:\Documentos\Exercicio_Ada\Modulo 06\CineStreamTA\src\main\java\com\tech\ada\spring_cinestream\controller\UsuarioController.java
-D:\Documentos\Exercicio_Ada\Modulo 06\CineStreamTA\src\main\java\com\tech\ada\spring_cinestream\dto\mapping\FilmeFavoritoMapper.java
-D:\Documentos\Exercicio_Ada\Modulo 06\CineStreamTA\src\main\java\com\tech\ada\spring_cinestream\dto\mapping\SerieFavoritaMapper.java
-D:\Documentos\Exercicio_Ada\Modulo 06\CineStreamTA\src\main\java\com\tech\ada\spring_cinestream\dto\mapping\UsuarioMapper.java
-D:\Documentos\Exercicio_Ada\Modulo 06\CineStreamTA\src\main\java\com\tech\ada\spring_cinestream\dto\request\FilmeFavoritoRequest.java
-D:\Documentos\Exercicio_Ada\Modulo 06\CineStreamTA\src\main\java\com\tech\ada\spring_cinestream\dto\request\FilmeRequest.java
-D:\Documentos\Exercicio_Ada\Modulo 06\CineStreamTA\src\main\java\com\tech\ada\spring_cinestream\dto\request\LoginRequest.java
-D:\Documentos\Exercicio_Ada\Modulo 06\CineStreamTA\src\main\java\com\tech\ada\spring_cinestream\dto\request\SerieFavoritaRequest.java
-D:\Documentos\Exercicio_Ada\Modulo 06\CineStreamTA\src\main\java\com\tech\ada\spring_cinestream\dto\request\SerieRequest.java
-D:\Documentos\Exercicio_Ada\Modulo 06\CineStreamTA\src\main\java\com\tech\ada\spring_cinestream\dto\request\UsuarioRequest.java
-D:\Documentos\Exercicio_Ada\Modulo 06\CineStreamTA\src\main\java\com\tech\ada\spring_cinestream\dto\response\ErrorResponse.java
-D:\Documentos\Exercicio_Ada\Modulo 06\CineStreamTA\src\main\java\com\tech\ada\spring_cinestream\dto\response\LoginResponse.java
-D:\Documentos\Exercicio_Ada\Modulo 06\CineStreamTA\src\main\java\com\tech\ada\spring_cinestream\dto\response\UsuarioResponse.java
-D:\Documentos\Exercicio_Ada\Modulo 06\CineStreamTA\src\main\java\com\tech\ada\spring_cinestream\dto\token\TokenResult.java
-D:\Documentos\Exercicio_Ada\Modulo 06\CineStreamTA\src\main\java\com\tech\ada\spring_cinestream\exception\AlreadyExistsException.java
-D:\Documentos\Exercicio_Ada\Modulo 06\CineStreamTA\src\main\java\com\tech\ada\spring_cinestream\exception\AuthenticationFailedException.java
-D:\Documentos\Exercicio_Ada\Modulo 06\CineStreamTA\src\main\java\com\tech\ada\spring_cinestream\exception\NotFoundException.java
-D:\Documentos\Exercicio_Ada\Modulo 06\CineStreamTA\src\main\java\com\tech\ada\spring_cinestream\model\FilmeFavorito.java
-D:\Documentos\Exercicio_Ada\Modulo 06\CineStreamTA\src\main\java\com\tech\ada\spring_cinestream\model\GeneroFavorito.java
-D:\Documentos\Exercicio_Ada\Modulo 06\CineStreamTA\src\main\java\com\tech\ada\spring_cinestream\model\SerieFavorita.java
-D:\Documentos\Exercicio_Ada\Modulo 06\CineStreamTA\src\main\java\com\tech\ada\spring_cinestream\model\TokenEntity.java
-D:\Documentos\Exercicio_Ada\Modulo 06\CineStreamTA\src\main\java\com\tech\ada\spring_cinestream\model\Usuario.java
-D:\Documentos\Exercicio_Ada\Modulo 06\CineStreamTA\src\main\java\com\tech\ada\spring_cinestream\repository\FilmeFavoritoRepository.java
-D:\Documentos\Exercicio_Ada\Modulo 06\CineStreamTA\src\main\java\com\tech\ada\spring_cinestream\repository\GeneroFavoritoRepository.java
-D:\Documentos\Exercicio_Ada\Modulo 06\CineStreamTA\src\main\java\com\tech\ada\spring_cinestream\repository\SerieFavoritaRepository.java
-D:\Documentos\Exercicio_Ada\Modulo 06\CineStreamTA\src\main\java\com\tech\ada\spring_cinestream\repository\TokenRepository.java
-D:\Documentos\Exercicio_Ada\Modulo 06\CineStreamTA\src\main\java\com\tech\ada\spring_cinestream\repository\UsuarioRepository.java
-D:\Documentos\Exercicio_Ada\Modulo 06\CineStreamTA\src\main\java\com\tech\ada\spring_cinestream\service\CustomUserDetailsService.java
-D:\Documentos\Exercicio_Ada\Modulo 06\CineStreamTA\src\main\java\com\tech\ada\spring_cinestream\service\FilmeService.java
-D:\Documentos\Exercicio_Ada\Modulo 06\CineStreamTA\src\main\java\com\tech\ada\spring_cinestream\service\JWTService.java
-D:\Documentos\Exercicio_Ada\Modulo 06\CineStreamTA\src\main\java\com\tech\ada\spring_cinestream\service\SerieService.java
-D:\Documentos\Exercicio_Ada\Modulo 06\CineStreamTA\src\main\java\com\tech\ada\spring_cinestream\service\UsuarioService.java
-D:\Documentos\Exercicio_Ada\Modulo 06\CineStreamTA\src\main\java\com\tech\ada\spring_cinestream\SpringCinestreamApplication.java
+/home/Alecsander/Projects/CineStreamTA/src/main/java/com/tech/ada/spring_cinestream/SpringCinestreamApplication.java
+/home/Alecsander/Projects/CineStreamTA/src/main/java/com/tech/ada/spring_cinestream/client/tmdbapi/ApiClient.java
+/home/Alecsander/Projects/CineStreamTA/src/main/java/com/tech/ada/spring_cinestream/client/tmdbapi/dto/response/Page.java
+/home/Alecsander/Projects/CineStreamTA/src/main/java/com/tech/ada/spring_cinestream/client/tmdbapi/dto/response/TmdbFilme.java
+/home/Alecsander/Projects/CineStreamTA/src/main/java/com/tech/ada/spring_cinestream/client/tmdbapi/dto/response/TmdbGenero.java
+/home/Alecsander/Projects/CineStreamTA/src/main/java/com/tech/ada/spring_cinestream/client/tmdbapi/dto/response/TmdbListaGeneros.java
+/home/Alecsander/Projects/CineStreamTA/src/main/java/com/tech/ada/spring_cinestream/client/tmdbapi/dto/response/TmdbSerie.java
+/home/Alecsander/Projects/CineStreamTA/src/main/java/com/tech/ada/spring_cinestream/config/CacheConfig.java
+/home/Alecsander/Projects/CineStreamTA/src/main/java/com/tech/ada/spring_cinestream/config/CorsConfig.java
+/home/Alecsander/Projects/CineStreamTA/src/main/java/com/tech/ada/spring_cinestream/config/RestTemplateConfig.java
+/home/Alecsander/Projects/CineStreamTA/src/main/java/com/tech/ada/spring_cinestream/config/SecurityConfig.java
+/home/Alecsander/Projects/CineStreamTA/src/main/java/com/tech/ada/spring_cinestream/config/SecurityFilter.java
+/home/Alecsander/Projects/CineStreamTA/src/main/java/com/tech/ada/spring_cinestream/controller/AdviceController.java
+/home/Alecsander/Projects/CineStreamTA/src/main/java/com/tech/ada/spring_cinestream/controller/AuthController.java
+/home/Alecsander/Projects/CineStreamTA/src/main/java/com/tech/ada/spring_cinestream/controller/FilmeController.java
+/home/Alecsander/Projects/CineStreamTA/src/main/java/com/tech/ada/spring_cinestream/controller/SerieController.java
+/home/Alecsander/Projects/CineStreamTA/src/main/java/com/tech/ada/spring_cinestream/controller/UsuarioController.java
+/home/Alecsander/Projects/CineStreamTA/src/main/java/com/tech/ada/spring_cinestream/dto/mapping/UsuarioMapper.java
+/home/Alecsander/Projects/CineStreamTA/src/main/java/com/tech/ada/spring_cinestream/dto/request/FilmeFavoritoRequest.java
+/home/Alecsander/Projects/CineStreamTA/src/main/java/com/tech/ada/spring_cinestream/dto/request/FilmeRequest.java
+/home/Alecsander/Projects/CineStreamTA/src/main/java/com/tech/ada/spring_cinestream/dto/request/LoginRequest.java
+/home/Alecsander/Projects/CineStreamTA/src/main/java/com/tech/ada/spring_cinestream/dto/request/SerieFavoritaRequest.java
+/home/Alecsander/Projects/CineStreamTA/src/main/java/com/tech/ada/spring_cinestream/dto/request/SerieRequest.java
+/home/Alecsander/Projects/CineStreamTA/src/main/java/com/tech/ada/spring_cinestream/dto/request/UsuarioRequest.java
+/home/Alecsander/Projects/CineStreamTA/src/main/java/com/tech/ada/spring_cinestream/dto/response/ErrorResponse.java
+/home/Alecsander/Projects/CineStreamTA/src/main/java/com/tech/ada/spring_cinestream/dto/response/LoginResponse.java
+/home/Alecsander/Projects/CineStreamTA/src/main/java/com/tech/ada/spring_cinestream/dto/response/UsuarioResponse.java
+/home/Alecsander/Projects/CineStreamTA/src/main/java/com/tech/ada/spring_cinestream/dto/token/TokenResult.java
+/home/Alecsander/Projects/CineStreamTA/src/main/java/com/tech/ada/spring_cinestream/exception/AlreadyExistsException.java
+/home/Alecsander/Projects/CineStreamTA/src/main/java/com/tech/ada/spring_cinestream/exception/AlreadyFavouriteException.java
+/home/Alecsander/Projects/CineStreamTA/src/main/java/com/tech/ada/spring_cinestream/exception/ApiClientException.java
+/home/Alecsander/Projects/CineStreamTA/src/main/java/com/tech/ada/spring_cinestream/exception/AuthenticationFailedException.java
+/home/Alecsander/Projects/CineStreamTA/src/main/java/com/tech/ada/spring_cinestream/exception/NotFoundException.java
+/home/Alecsander/Projects/CineStreamTA/src/main/java/com/tech/ada/spring_cinestream/model/FilmeFavorito.java
+/home/Alecsander/Projects/CineStreamTA/src/main/java/com/tech/ada/spring_cinestream/model/SerieFavorita.java
+/home/Alecsander/Projects/CineStreamTA/src/main/java/com/tech/ada/spring_cinestream/model/Token.java
+/home/Alecsander/Projects/CineStreamTA/src/main/java/com/tech/ada/spring_cinestream/model/Usuario.java
+/home/Alecsander/Projects/CineStreamTA/src/main/java/com/tech/ada/spring_cinestream/repository/FilmeFavoritoRepository.java
+/home/Alecsander/Projects/CineStreamTA/src/main/java/com/tech/ada/spring_cinestream/repository/SerieFavoritaRepository.java
+/home/Alecsander/Projects/CineStreamTA/src/main/java/com/tech/ada/spring_cinestream/repository/TokenRepository.java
+/home/Alecsander/Projects/CineStreamTA/src/main/java/com/tech/ada/spring_cinestream/repository/UsuarioRepository.java
+/home/Alecsander/Projects/CineStreamTA/src/main/java/com/tech/ada/spring_cinestream/service/CustomUserDetailsService.java
+/home/Alecsander/Projects/CineStreamTA/src/main/java/com/tech/ada/spring_cinestream/service/FilmeService.java
+/home/Alecsander/Projects/CineStreamTA/src/main/java/com/tech/ada/spring_cinestream/service/JWTService.java
+/home/Alecsander/Projects/CineStreamTA/src/main/java/com/tech/ada/spring_cinestream/service/SerieService.java
+/home/Alecsander/Projects/CineStreamTA/src/main/java/com/tech/ada/spring_cinestream/service/UsuarioService.java
