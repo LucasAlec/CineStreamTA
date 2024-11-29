@@ -1,0 +1,16 @@
+-------------------------------------------------------------------------------
+Test set: com.tech.ada.spring_cinestream.service.SerieServiceIntegrationTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.540 s <<< FAILURE! -- in com.tech.ada.spring_cinestream.service.SerieServiceIntegrationTest
+com.tech.ada.spring_cinestream.service.SerieServiceIntegrationTest.testBuscarSeriePorTituloIntegracao -- Time elapsed: 0.011 s <<< ERROR!
+java.lang.UnsupportedOperationException
+	at java.base/java.util.ImmutableCollections.uoe(ImmutableCollections.java:142)
+	at java.base/java.util.ImmutableCollections$AbstractImmutableMap.putAll(ImmutableCollections.java:1080)
+	at com.tech.ada.spring_cinestream.client.tmdbapi.ApiClient.getParams(ApiClient.java:112)
+	at com.tech.ada.spring_cinestream.client.tmdbapi.ApiClient.buscarSeriesPorTitulo(ApiClient.java:57)
+	at com.tech.ada.spring_cinestream.service.SerieService.buscarSeriePorTitulo(SerieService.java:18)
+	at com.tech.ada.spring_cinestream.service.SerieServiceIntegrationTest.testBuscarSeriePorTituloIntegracao(SerieServiceIntegrationTest.java:38)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
+

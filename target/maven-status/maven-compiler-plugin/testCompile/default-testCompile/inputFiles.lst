@@ -3,4 +3,7 @@ C:\Users\allana\Documents\AdaTech_Coders\TestesAutomatizadosI\CineStreamTA\CineS
 C:\Users\allana\Documents\AdaTech_Coders\TestesAutomatizadosI\CineStreamTA\CineStreamTA\src\test\java\com\tech\ada\spring_cinestream\controller\FilmeControllerTest.java
 C:\Users\allana\Documents\AdaTech_Coders\TestesAutomatizadosI\CineStreamTA\CineStreamTA\src\test\java\com\tech\ada\spring_cinestream\controller\SerieControllerTest.java
 C:\Users\allana\Documents\AdaTech_Coders\TestesAutomatizadosI\CineStreamTA\CineStreamTA\src\test\java\com\tech\ada\spring_cinestream\controller\UsuarioControllerTest.java
+C:\Users\allana\Documents\AdaTech_Coders\TestesAutomatizadosI\CineStreamTA\CineStreamTA\src\test\java\com\tech\ada\spring_cinestream\service\FilmeServiceTest.java
+C:\Users\allana\Documents\AdaTech_Coders\TestesAutomatizadosI\CineStreamTA\CineStreamTA\src\test\java\com\tech\ada\spring_cinestream\service\SerieServiceIntegrationTest.java
+C:\Users\allana\Documents\AdaTech_Coders\TestesAutomatizadosI\CineStreamTA\CineStreamTA\src\test\java\com\tech\ada\spring_cinestream\service\SerieServiceTest.java
 C:\Users\allana\Documents\AdaTech_Coders\TestesAutomatizadosI\CineStreamTA\CineStreamTA\src\test\java\com\tech\ada\spring_cinestream\service\UsuarioServiceTest.java
