@@ -48,9 +48,9 @@ public class UsuarioService {
 
     public Usuario buscarPorEmail(String email) throws NotFoundException {
 
-<span class="nc" id="L51">        return usuarioRepository.findByEmail(email)</span>
+<span class="pc" id="L51">        return usuarioRepository.findByEmail(email)</span>
 <span class="nc" id="L52">                .orElseThrow(</span>
-<span class="nc" id="L53">                        () -&gt; new NotFoundException(String.format(&quot;Email %s não encontrado&quot;, email)</span>
+<span class="fc" id="L53">                        () -&gt; new NotFoundException(String.format(&quot;Email %s não encontrado&quot;, email)</span>
                 ));
     }
 

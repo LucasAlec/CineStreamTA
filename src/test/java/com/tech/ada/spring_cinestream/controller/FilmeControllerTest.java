@@ -38,7 +38,6 @@ public class FilmeControllerTest {
         TmdbFilme filme2 = new TmdbFilme("Interstellar", "Sinopse de Interstellar", "2014-11-07", 8.6, "/poster2.jpg", 2L);
         Page<TmdbFilme> paginaDeFilmes = new Page<>(1, Arrays.asList(filme1, filme2), 1, 10);
 
-        // Simula a resposta do serviço
         when(filmeService.buscarFilmePorTitulo(titulo, page)).thenReturn(paginaDeFilmes);
 
         // Quando

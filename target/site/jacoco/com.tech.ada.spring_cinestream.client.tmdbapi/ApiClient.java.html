@@ -51,93 +51,70 @@ public class ApiClient {
     }
 
 
-    public Page&lt;TmdbFilme&gt; buscarFilmesPorAnoLancamento(String ano, Integer page) {
-<span class="nc" id="L55">        return makeApiCall(</span>
-                &quot;/search/movie&quot;,
-<span class="nc" id="L57">                getParams(Map.of(</span>
-                    &quot;query&quot;, &quot; &quot;,
-                    &quot;page&quot;, page,
-                    &quot;year&quot;, ano
-                )),
-<span class="nc" id="L62">                new ParameterizedTypeReference&lt;&gt;() {}</span>
-        );
-    }
-
     public Page&lt;TmdbSerie&gt; buscarSeriesPorTitulo(String titulo, Integer page) {
-<span class="nc" id="L67">        return makeApiCall(</span>
+<span class="nc" id="L55">        return makeApiCall(</span>
                 &quot;/search/tv&quot;,
-<span class="nc" id="L69">                getParams(Map.of(</span>
+<span class="nc" id="L57">                getParams(Map.of(</span>
                     &quot;api_key&quot;, apiKey,
                     &quot;query&quot;, titulo,
                     &quot;page&quot;, page
                 )),
-<span class="nc" id="L74">                new ParameterizedTypeReference&lt;&gt;() {}</span>
+<span class="nc" id="L62">                new ParameterizedTypeReference&lt;&gt;() {}</span>
                 );
     }
 
-    public Page&lt;TmdbSerie&gt; buscarSeriesPorAnoLancamento(String ano, Integer page) {
-<span class="nc" id="L79">        return makeApiCall(</span>
-                &quot;/search/tv&quot;,
-<span class="nc" id="L81">                getParams(Map.of(</span>
-                    &quot;page&quot;, page,
-                    &quot;query&quot;, &quot; &quot;,
-                    &quot;first_air_date_year&quot;, ano
-                )),
-<span class="nc" id="L86">                new ParameterizedTypeReference&lt;&gt;() {}</span>
-        );
-    }
 
     public TmdbSerie buscarDetalhesSerie(long id) {
-<span class="nc" id="L91">        String path = String.format(&quot;/tv/%d&quot;, id);</span>
-<span class="nc" id="L92">        return makeApiCall(</span>
+<span class="nc" id="L68">        String path = String.format(&quot;/tv/%d&quot;, id);</span>
+<span class="nc" id="L69">        return makeApiCall(</span>
                 path,
-<span class="nc" id="L94">                Map.of(),</span>
+<span class="nc" id="L71">                Map.of(),</span>
                 TmdbSerie.class
         );
     }
 
     private HttpHeaders getHeader() {
-<span class="nc" id="L100">        HttpHeaders headers = new HttpHeaders();</span>
-<span class="nc" id="L101">        headers.setBearerAuth(apiKey);</span>
-<span class="nc" id="L102">        return headers;</span>
+<span class="nc" id="L77">        HttpHeaders headers = new HttpHeaders();</span>
+<span class="nc" id="L78">        headers.setBearerAuth(apiKey);</span>
+<span class="nc" id="L79">        return headers;</span>
     }
 
     private &lt;T&gt; T makeApiCall(String path, Map&lt;String, Object&gt; queryParams, ParameterizedTypeReference&lt;T&gt; responseType) {
-<span class="nc" id="L106">        String url = buildUrl(path, queryParams);</span>
-<span class="nc" id="L107">        logger.info(&quot;Fazendo chamada à API: {}&quot;, url.replace(apiKey, &quot;API_KEY&quot;));</span>
+<span class="nc" id="L83">        String url = buildUrl(path, queryParams);</span>
+<span class="nc" id="L84">        logger.info(&quot;Fazendo chamada à API: {}&quot;, url.replace(apiKey, &quot;API_KEY&quot;));</span>
         try {
-<span class="nc" id="L109">            return restTemplate.exchange(url, HttpMethod.GET, new HttpEntity&lt;&gt;(getHeader()), responseType).getBody();</span>
-<span class="nc" id="L110">        } catch (Exception e) {</span>
-<span class="nc" id="L111">            logger.error(&quot;Erro na chamada à API: {}&quot;, url.replace(apiKey, &quot;API_KEY&quot;), e);</span>
-<span class="nc" id="L112">            throw new ApiClientException(&quot;Erro na chamada API&quot;, e);</span>
+<span class="nc" id="L86">            return restTemplate.exchange(url, HttpMethod.GET, new HttpEntity&lt;&gt;(getHeader()), responseType).getBody();</span>
+<span class="nc" id="L87">        } catch (Exception e) {</span>
+<span class="nc" id="L88">            logger.error(&quot;Erro na chamada à API: {}&quot;, url.replace(apiKey, &quot;API_KEY&quot;), e);</span>
+<span class="nc" id="L89">            throw new ApiClientException(&quot;Erro na chamada API&quot;, e);</span>
         }
     }
 
     private &lt;T&gt; T makeApiCall(String path, Map&lt;String, Object&gt; queryParams, Class&lt;T&gt; responseType) {
-<span class="nc" id="L117">        String url = buildUrl(path, queryParams);</span>
-<span class="nc" id="L118">        logger.info(&quot;Fazendo chamada à API: {}&quot;, url.replace(apiKey, &quot;API_KEY&quot;));</span>
+<span class="nc" id="L94">        String url = buildUrl(path, queryParams);</span>
+<span class="nc" id="L95">        logger.info(&quot;Fazendo chamada à API: {}&quot;, url.replace(apiKey, &quot;API_KEY&quot;));</span>
         try {
-<span class="nc" id="L120">            return restTemplate.exchange(url, HttpMethod.GET, new HttpEntity&lt;&gt;(getHeader()), responseType).getBody();</span>
-<span class="nc" id="L121">        } catch (Exception e) {</span>
-<span class="nc" id="L122">            logger.error(&quot;Erro na chamada à API: {}&quot;, url.replace(apiKey, &quot;API_KEY&quot;), e);</span>
-<span class="nc" id="L123">            throw new ApiClientException(&quot;Erro na chamada API&quot;, e);</span>
+<span class="nc" id="L97">            return restTemplate.exchange(url, HttpMethod.GET, new HttpEntity&lt;&gt;(getHeader()), responseType).getBody();</span>
+<span class="nc" id="L98">        } catch (Exception e) {</span>
+<span class="nc" id="L99">            logger.error(&quot;Erro na chamada à API: {}&quot;, url.replace(apiKey, &quot;API_KEY&quot;), e);</span>
+<span class="nc" id="L100">            throw new ApiClientException(&quot;Erro na chamada API&quot;, e);</span>
         }
     }
 
     private String buildUrl(String path, Map&lt;String, Object&gt; queryParams) {
-<span class="nc" id="L128">        UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(apiBaseUrl).path(path);</span>
-<span class="nc" id="L129">        queryParams.forEach(builder::queryParam);</span>
-<span class="nc" id="L130">        return builder.toUriString();</span>
+<span class="nc" id="L105">        UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(apiBaseUrl).path(path);</span>
+<span class="nc" id="L106">        queryParams.forEach(builder::queryParam);</span>
+<span class="nc" id="L107">        return builder.toUriString();</span>
     }
 
     private Map&lt;String, Object&gt; getParams(Map&lt;String, Object&gt; params) {
-<span class="nc" id="L134">        Map&lt;String, Object&gt; defaults = getParams();</span>
-<span class="nc" id="L135">        params.putAll(defaults);</span>
-<span class="nc" id="L136">        return params;</span>
+<span class="nc" id="L111">        Map&lt;String, Object&gt; defaults = getParams();</span>
+<span class="nc" id="L112">        params.putAll(defaults);</span>
+<span class="nc" id="L113">        return params;</span>
     }
 
     private Map&lt;String, Object&gt; getParams() {
-<span class="nc" id="L140">        return Map.of(&quot;language&quot;, &quot;pt-BR&quot;);</span>
+<span class="nc" id="L117">        return Map.of(&quot;language&quot;, &quot;pt-BR&quot;);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>
