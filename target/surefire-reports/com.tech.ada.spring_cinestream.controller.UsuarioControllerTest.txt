@@ -1,4 +1,15 @@
 -------------------------------------------------------------------------------
 Test set: com.tech.ada.spring_cinestream.controller.UsuarioControllerTest
 -------------------------------------------------------------------------------
-Tests run: 14, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.757 s -- in com.tech.ada.spring_cinestream.controller.UsuarioControllerTest
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.016 s <<< FAILURE! -- in com.tech.ada.spring_cinestream.controller.UsuarioControllerTest
+com.tech.ada.spring_cinestream.controller.UsuarioControllerTest -- Time elapsed: 0.016 s <<< ERROR!
+java.lang.NoSuchMethodError: 'org.junit.jupiter.api.extension.ExecutableInvoker org.junit.jupiter.api.extension.ExtensionContext.getExecutableInvoker()'
+	at org.springframework.test.context.junit.jupiter.SpringExtension.registerMethodInvoker(SpringExtension.java:381)
+	at org.springframework.test.context.junit.jupiter.SpringExtension.beforeAll(SpringExtension.java:132)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
+	Suppressed: java.lang.NoSuchMethodError: 'org.junit.jupiter.api.extension.ExecutableInvoker org.junit.jupiter.api.extension.ExtensionContext.getExecutableInvoker()'
+		at org.springframework.test.context.junit.jupiter.SpringExtension.registerMethodInvoker(SpringExtension.java:381)
+		at org.springframework.test.context.junit.jupiter.SpringExtension.afterAll(SpringExtension.java:143)
+		at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
+		... 1 more
+

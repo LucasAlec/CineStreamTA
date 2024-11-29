@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.tech.ada.spring_cinestream.service.UsuarioServiceTest
+-------------------------------------------------------------------------------
+Tests run: 14, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.047 s -- in com.tech.ada.spring_cinestream.service.UsuarioServiceTest
