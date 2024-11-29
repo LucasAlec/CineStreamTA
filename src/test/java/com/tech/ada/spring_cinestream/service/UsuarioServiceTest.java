@@ -17,10 +17,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-
-import static junit.framework.TestCase.assertNotNull;
-import static org.junit.Assert.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.*;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -59,7 +55,7 @@ public class UsuarioServiceTest {
         Mockito.when(usuarioRepository.existsUsuarioByEmail(email)).thenReturn(true);
 
         // Então
-        assertThrows(AlreadyExistsException.class, () -> {
+        Assertions.assertThrows(AlreadyExistsException.class, () -> {
             usuarioService.criar(usuarioRequest);
         });
     }
@@ -73,7 +69,7 @@ public class UsuarioServiceTest {
         Mockito.when(usuarioRepository.findByEmail(email)).thenReturn(Optional.empty());
 
         // Então
-        assertThrows(NotFoundException.class, () -> {
+        Assertions.assertThrows(NotFoundException.class, () -> {
             usuarioService.buscarPorEmail(email);
         });
     }
@@ -97,7 +93,7 @@ public class UsuarioServiceTest {
     @Test
     public void testValidateUserLogin_ComEmailNaoRegistrado() {
         // Dado
-        String email = "usuario_inexistente@gmail.com";
+        String email = "vitor@gmail.com";
         String senha = "senha123";
 
         // Quando
@@ -117,7 +113,7 @@ public class UsuarioServiceTest {
         Mockito.when(usuarioRepository.findById(id)).thenReturn(Optional.empty());
 
         // Então
-        assertThrows(NotFoundException.class, () -> {
+        Assertions.assertThrows(NotFoundException.class, () -> {
             usuarioService.buscarPorId(id);
         });
     }
@@ -125,7 +121,7 @@ public class UsuarioServiceTest {
     @Test
     public void testValidateUserLogin_ComCredenciaisCorretas() {
         //Dado
-        String email = "usuario@gmail.com";
+        String email = "viviane@gmail.com";
         String senha = "senha123";
 
         Usuario usuario = new Usuario();
@@ -145,7 +141,7 @@ public class UsuarioServiceTest {
     @Test
     public void testValidateUserLogin_ComCredenciaisIncorretas() {
         //Dado
-        String email = "usuario@gmail.com";
+        String email = "viviane@gmail.com";
         String senha = "senhaErrada";
 
         Usuario usuario = new Usuario();
@@ -177,7 +173,7 @@ public class UsuarioServiceTest {
         when(tmdbClient.buscarDetalhesFilme(idFilme)).thenReturn(tmdbFilme);
 
         // Quando
-        assertThrows(AlreadyFavouriteException.class, () -> {
+        Assertions.assertThrows(AlreadyFavouriteException.class, () -> {
             usuarioService.favoritarFilme(idFilme, usuario);
         });
     }
@@ -212,7 +208,7 @@ public class UsuarioServiceTest {
         when(usuario.filmeJaEFavorito(idFilme)).thenReturn(false);
 
         // Quando e Então
-        assertThrows(NotFoundException.class, () -> {
+        Assertions.assertThrows(NotFoundException.class, () -> {
             usuarioService.removerFilmeFavorito(idFilme, usuario);
         });
         verify(usuario, times(0)).removeFilmeFavorito(idFilme);
@@ -241,7 +237,7 @@ public class UsuarioServiceTest {
 
 
     @Test
-    public void testFavoritarSerie_ComSerieJaFavorita() throws AlreadyFavouriteException {
+    public void testFavoritarSerie_ComSerieJaFavorita() {
         // Dado
         Long idSerie = 123L;
         Usuario usuario = mock(Usuario.class);
@@ -251,7 +247,7 @@ public class UsuarioServiceTest {
         when(usuario.serieJaEFavorita(idSerie)).thenReturn(true);
 
         // Quando
-        assertThrows(AlreadyFavouriteException.class, () -> {
+        Assertions.assertThrows(AlreadyFavouriteException.class, () -> {
             usuarioService.favoritarSerie(idSerie, usuario);
         });
 
@@ -269,7 +265,7 @@ public class UsuarioServiceTest {
         when(usuario.serieJaEFavorita(idSerie)).thenReturn(false);
 
         // Quando e Então
-        assertThrows(NotFoundException.class, () -> {
+        Assertions.assertThrows(NotFoundException.class, () -> {
             usuarioService.removerSerieFavorita(idSerie, usuario);
         });
 
