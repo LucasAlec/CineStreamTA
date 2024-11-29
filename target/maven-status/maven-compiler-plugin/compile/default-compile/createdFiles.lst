@@ -31,7 +31,6 @@ com\tech\ada\spring_cinestream\service\FilmeService.class
 com\tech\ada\spring_cinestream\controller\AuthController.class
 com\tech\ada\spring_cinestream\client\tmdbapi\ApiClient.class
 com\tech\ada\spring_cinestream\controller\AdviceController.class
-com\tech\ada\spring_cinestream\client\tmdbapi\dto\response\TmdbListaGeneros.class
 com\tech\ada\spring_cinestream\config\CacheConfig.class
 com\tech\ada\spring_cinestream\controller\FilmeController.class
 com\tech\ada\spring_cinestream\model\Token.class
@@ -43,7 +42,6 @@ com\tech\ada\spring_cinestream\repository\UsuarioRepository.class
 com\tech\ada\spring_cinestream\SpringCinestreamApplication.class
 com\tech\ada\spring_cinestream\client\tmdbapi\ApiClient$1.class
 com\tech\ada\spring_cinestream\service\SerieService.class
-com\tech\ada\spring_cinestream\client\tmdbapi\dto\response\TmdbGenero.class
 com\tech\ada\spring_cinestream\repository\FilmeFavoritoRepository.class
 com\tech\ada\spring_cinestream\model\FilmeFavorito.class
 com\tech\ada\spring_cinestream\controller\SerieController.class

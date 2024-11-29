@@ -24,6 +24,8 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import java.util.Collections;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.doNothing;
@@ -49,7 +51,7 @@ public class UsuarioControllerTest {
     }
 
     @Test
-    public void dadoEmailValido_quandoBuscarUsuarioPorEmail_entaoRetornaUsuario() throws Exception {
+    public void dadoEmailValido_quandoBuscarUsuarioPorEmail_entaoRetornaUsuarioEsperado() throws Exception {
         // Dado
         String email = "alex@gmail.com";
         Usuario usuario = new Usuario("Alex", "alexmendes", email, "senha123");
@@ -299,5 +301,33 @@ public class UsuarioControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(String.valueOf(idTmdb)))
                 .andExpect(status().isForbidden());
+    }
+
+    @Test
+    public void dadoIdTmdbInvalido_quandoAdicionarFilmeFavorito_entaoRetornaAccepted() throws Exception {
+        Usuario usuario = new Usuario("allana", "user123", "allana@gmail.com", "password");
+        Authentication auth = new UsernamePasswordAuthenticationToken(
+                usuario,
+                null,
+                Collections.singleton(new SimpleGrantedAuthority("ROLE_USER"))
+        );
+        SecurityContextHolder.getContext().setAuthentication(auth);
+
+        mockMvc.perform(post("/usuario/favorito/filme/adicionar")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("-1"))
+                .andExpect(status().isAccepted())
+                .andExpect(content().string("Filme adicionado como favorito."));
+    }
+
+    @Test
+    public void dadoIdTmdbInvalido_quandoChamarFavoritarFilme_entaoNaoLancaExcecao() {
+        Usuario usuario = new Usuario("allana", "user123", "allana@gmail.com", "password");
+
+        Long idTmdb = -1L;
+
+        assertDoesNotThrow(() -> {
+            usuarioService.favoritarFilme(idTmdb, usuario);
+        });
     }
 }

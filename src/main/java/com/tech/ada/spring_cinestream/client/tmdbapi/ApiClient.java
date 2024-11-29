@@ -51,18 +51,6 @@ public class ApiClient {
     }
 
 
-    public Page<TmdbFilme> buscarFilmesPorAnoLancamento(String ano, Integer page) {
-        return makeApiCall(
-                "/search/movie",
-                getParams(Map.of(
-                    "query", " ",
-                    "page", page,
-                    "year", ano
-                )),
-                new ParameterizedTypeReference<>() {}
-        );
-    }
-
     public Page<TmdbSerie> buscarSeriesPorTitulo(String titulo, Integer page) {
         return makeApiCall(
                 "/search/tv",
@@ -75,17 +63,6 @@ public class ApiClient {
                 );
     }
 
-    public Page<TmdbSerie> buscarSeriesPorAnoLancamento(String ano, Integer page) {
-        return makeApiCall(
-                "/search/tv",
-                getParams(Map.of(
-                    "page", page,
-                    "query", " ",
-                    "first_air_date_year", ano
-                )),
-                new ParameterizedTypeReference<>() {}
-        );
-    }
 
     public TmdbSerie buscarDetalhesSerie(long id) {
         String path = String.format("/tv/%d", id);

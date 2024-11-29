@@ -1,8 +1,6 @@
 C:\Users\allana\Documents\AdaTech_Coders\TestesAutomatizadosI\CineStreamTA\CineStreamTA\src\main\java\com\tech\ada\spring_cinestream\client\tmdbapi\ApiClient.java
 C:\Users\allana\Documents\AdaTech_Coders\TestesAutomatizadosI\CineStreamTA\CineStreamTA\src\main\java\com\tech\ada\spring_cinestream\client\tmdbapi\dto\response\Page.java
 C:\Users\allana\Documents\AdaTech_Coders\TestesAutomatizadosI\CineStreamTA\CineStreamTA\src\main\java\com\tech\ada\spring_cinestream\client\tmdbapi\dto\response\TmdbFilme.java
-C:\Users\allana\Documents\AdaTech_Coders\TestesAutomatizadosI\CineStreamTA\CineStreamTA\src\main\java\com\tech\ada\spring_cinestream\client\tmdbapi\dto\response\TmdbGenero.java
-C:\Users\allana\Documents\AdaTech_Coders\TestesAutomatizadosI\CineStreamTA\CineStreamTA\src\main\java\com\tech\ada\spring_cinestream\client\tmdbapi\dto\response\TmdbListaGeneros.java
 C:\Users\allana\Documents\AdaTech_Coders\TestesAutomatizadosI\CineStreamTA\CineStreamTA\src\main\java\com\tech\ada\spring_cinestream\client\tmdbapi\dto\response\TmdbSerie.java
 C:\Users\allana\Documents\AdaTech_Coders\TestesAutomatizadosI\CineStreamTA\CineStreamTA\src\main\java\com\tech\ada\spring_cinestream\config\CacheConfig.java
 C:\Users\allana\Documents\AdaTech_Coders\TestesAutomatizadosI\CineStreamTA\CineStreamTA\src\main\java\com\tech\ada\spring_cinestream\config\CorsConfig.java
