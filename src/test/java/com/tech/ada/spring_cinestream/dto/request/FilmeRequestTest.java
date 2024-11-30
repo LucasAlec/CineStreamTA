@@ -1,6 +1,5 @@
-package com.tech.ada.spring_cinestream.dto;
+package com.tech.ada.spring_cinestream.dto.request;
 
-import com.tech.ada.spring_cinestream.dto.request.FilmeRequest;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;

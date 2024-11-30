@@ -1,8 +1,7 @@
-package com.tech.ada.spring_cinestream.dto;
+package com.tech.ada.spring_cinestream.dto.mapping;
 
 import com.tech.ada.spring_cinestream.client.tmdbapi.dto.response.TmdbFilme;
 import com.tech.ada.spring_cinestream.client.tmdbapi.dto.response.TmdbSerie;
-import com.tech.ada.spring_cinestream.dto.mapping.UsuarioMapper;
 import com.tech.ada.spring_cinestream.dto.request.UsuarioRequest;
 import com.tech.ada.spring_cinestream.dto.response.UsuarioResponse;
 import com.tech.ada.spring_cinestream.model.Usuario;
