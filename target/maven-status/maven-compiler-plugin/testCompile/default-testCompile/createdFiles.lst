@@ -1,4 +1,12 @@
-com/tech/ada/spring_cinestream/dto/FilmeFavoritoRequestTest.class
+com/tech/ada/spring_cinestream/dto/request/UsuarioRequestTest.class
+com/tech/ada/spring_cinestream/dto/response/LoginResponseTest.class
+com/tech/ada/spring_cinestream/dto/response/UsuarioResponseTest.class
+com/tech/ada/spring_cinestream/dto/mapping/UsuarioMapperTest.class
+com/tech/ada/spring_cinestream/dto/request/FilmeRequestTest.class
+com/tech/ada/spring_cinestream/dto/request/SerieFavoritaRequestTest.class
+com/tech/ada/spring_cinestream/dto/request/LoginRequestTest.class
+com/tech/ada/spring_cinestream/dto/response/ErrorResponseTest.class
+com/tech/ada/spring_cinestream/dto/request/SerieRequestTest.class
 com/tech/ada/spring_cinestream/SpringCinestreamApplicationTests.class
-com/tech/ada/spring_cinestream/dto/FilmeRequestTest.class
-com/tech/ada/spring_cinestream/dto/UsuarioMapperTest.class
+com/tech/ada/spring_cinestream/dto/request/FilmeFavoritoRequestTest.class
+com/tech/ada/spring_cinestream/dto/token/TokenResultTest.class

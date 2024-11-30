@@ -1,4 +1,12 @@
 /home/Alecsander/Projects/CineStreamTA/src/test/java/com/tech/ada/spring_cinestream/SpringCinestreamApplicationTests.java
-/home/Alecsander/Projects/CineStreamTA/src/test/java/com/tech/ada/spring_cinestream/dto/FilmeFavoritoRequestTest.java
-/home/Alecsander/Projects/CineStreamTA/src/test/java/com/tech/ada/spring_cinestream/dto/FilmeRequestTest.java
-/home/Alecsander/Projects/CineStreamTA/src/test/java/com/tech/ada/spring_cinestream/dto/UsuarioMapperTest.java
+/home/Alecsander/Projects/CineStreamTA/src/test/java/com/tech/ada/spring_cinestream/dto/mapping/UsuarioMapperTest.java
+/home/Alecsander/Projects/CineStreamTA/src/test/java/com/tech/ada/spring_cinestream/dto/request/FilmeFavoritoRequestTest.java
+/home/Alecsander/Projects/CineStreamTA/src/test/java/com/tech/ada/spring_cinestream/dto/request/FilmeRequestTest.java
+/home/Alecsander/Projects/CineStreamTA/src/test/java/com/tech/ada/spring_cinestream/dto/request/LoginRequestTest.java
+/home/Alecsander/Projects/CineStreamTA/src/test/java/com/tech/ada/spring_cinestream/dto/request/SerieFavoritaRequestTest.java
+/home/Alecsander/Projects/CineStreamTA/src/test/java/com/tech/ada/spring_cinestream/dto/request/SerieRequestTest.java
+/home/Alecsander/Projects/CineStreamTA/src/test/java/com/tech/ada/spring_cinestream/dto/request/UsuarioRequestTest.java
+/home/Alecsander/Projects/CineStreamTA/src/test/java/com/tech/ada/spring_cinestream/dto/response/ErrorResponseTest.java
+/home/Alecsander/Projects/CineStreamTA/src/test/java/com/tech/ada/spring_cinestream/dto/response/LoginResponseTest.java
+/home/Alecsander/Projects/CineStreamTA/src/test/java/com/tech/ada/spring_cinestream/dto/response/UsuarioResponseTest.java
+/home/Alecsander/Projects/CineStreamTA/src/test/java/com/tech/ada/spring_cinestream/dto/token/TokenResultTest.java
