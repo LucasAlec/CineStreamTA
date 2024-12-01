@@ -134,7 +134,7 @@ Os testes utilizam os frameworks **JUnit**, **Mockito**, **Cucumber**, e **WireM
 
 | <img src="https://avatars.githubusercontent.com/u/61765668?v=4" width="100"> | <img src="https://avatars.githubusercontent.com/u/89415462?v=4" width="100"> | <img src="https://avatars.githubusercontent.com/u/114600184?v=4" width="100"> |
 |------------------------------------------------------------------------------|------------------------------------------------------------------------------|------------------------------------------------------------------------------|
-| [**Allana Ávila**](https://github.com/allanaavila)                           | [**Lucas Alec**](https://github.com/LucasAlec)                              | [**Brunna Leite**](https://github.com/brunnafelix)                           |
+| [**Allana Ávila**](https://github.com/allanaavila)                           | [**Lucas Alec**](https://github.com/LucasAlec)                              | [**Marina Guimarães**](https://github.com/marinagv95)                           |
 
 
 
