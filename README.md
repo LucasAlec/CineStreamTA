@@ -139,17 +139,7 @@ Os testes utilizam os frameworks **JUnit**, **Mockito** e **WireMock**, e a cobe
 
 ## Alunos
 
-## Alunos
-
-| ![Allana Ávila](https://avatars.githubusercontent.com/u/61765668?v=4) | ![Lucas Alec](https://avatars.githubusercontent.com/u/89415462?v=4) | ![Seu Nome](https://avatars.githubusercontent.com/u/114600184?v=4) |
-|----------------------------------------------------------------------|--------------------------------------------------------------------|----------------------------------------------------------------|
-| [**Allana Ávila**](https://github.com/allanaavila)                   | [**Lucas Alec**](https://github.com/LucasAlec)                    | [**Marina Guimarães**](https://github.com/seu_usuario)                |
-
-
-
-## Alunos
-
-| <img src="https://avatars.githubusercontent.com/u/61765668?v=4" width="50"> | <img src="https://avatars.githubusercontent.com/u/89415462?v=4" width="50"> | <img src="https://avatars.githubusercontent.com/u/114600184?v=4" width="50"> |
+| <img src="https://avatars.githubusercontent.com/u/61765668?v=4" width="70"> | <img src="https://avatars.githubusercontent.com/u/89415462?v=4" width="70"> | <img src="https://avatars.githubusercontent.com/u/114600184?v=4" width="70"> |
 |------------------------------------------------------------------------------|------------------------------------------------------------------------------|------------------------------------------------------------------------------|
 | [**Allana Ávila**](https://github.com/allanaavila)                           | [**Lucas Alec**](https://github.com/LucasAlec)                              | [**Marina Guimarães**](https://github.com/marinagv95)                              |
 
