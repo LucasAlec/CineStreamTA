@@ -8,17 +8,16 @@ CineStream é uma aplicação web desenvolvida utilizando **Java Spring Boot**, 
 
 ### Gerenciamento de Filmes:
 - Adicionar filmes favoritos.
-- Buscar filmes por gênero, ano e avaliações.
+- Buscar filmes por ano e avaliações.
 - Exibir avaliações e notas do IMDb.
 
 ### Gerenciamento de Séries:
 - Adicionar séries favoritas.
 - Acompanhar séries por temporadas e episódios.
-- Exibir gênero e ano de lançamento.
+- Exibir o ano de lançamento.
 
 ### Gerenciamento de Usuários:
 - Registrar e gerenciar perfis de usuários.
-- Configurar gêneros e preferências favoritas (em desenvolvimento).
 
 ### Integração:
 - Conexão com a **API TMDB** para buscar informações detalhadas de filmes e séries.
@@ -46,6 +45,7 @@ CineStream é uma aplicação web desenvolvida utilizando **Java Spring Boot**, 
 - **JUnit**: Framework para testes automatizados.
 - **Mockito**: Mocking de componentes para testes unitários.
 - **WireMock**: Mocking de APIs externas durante os testes.
+- **Cucumber**: Testes de comportamento (BDD).
 - **Spring Security Test**: Testes de autenticação e autorização.
 
 ### Gerenciamento de Configurações:
@@ -70,8 +70,11 @@ O projeto possui cobertura de testes para garantir a consistência das funcional
 - **DTO:** Verificação do mapeamento correto entre entidades e objetos de transferência de dados.
 - **Service:** Testes das regras de negócio e validação de comportamentos esperados.
 - **Repository:** Testes das operações de persistência no banco de dados.
+- **Cucumber:** Para validação de cenários de comportamento (BDD).
 
-Os testes utilizam os frameworks **JUnit**, **Mockito** e **WireMock**, e a cobertura é analisada com **JaCoCo**. O mínimo de cobertura exigido é de 60% para a camada de classes.
+Os testes utilizam os frameworks **JUnit**, **Mockito**, **Cucumber**, e **WireMock**, e a cobertura é analisada com **JaCoCo**. O mínimo de cobertura exigido é de 60% para a camada de classes.
+
+**Repositório de Testes:** [CineStream-test](https://github.com/allanaavila/CineStream-test)
 
 ---
 
@@ -125,21 +128,13 @@ Os testes utilizam os frameworks **JUnit**, **Mockito** e **WireMock**, e a cobe
   - **Requisição:** Necessita autenticação e dados da série no corpo da requisição.
   - **Resposta:** Detalhes da série adicionada como favorita.
 
-### Favoritos
-- **GET** `/usuario/favorito/**`
-  - Retorna os conteúdos favoritos do usuário autenticado.
-  - **Requisição:** Necessita autenticação.
-  - **Resposta:** Lista de favoritos.
-
-- **GET** `/usuario/**`
-  - Permite acesso a informações públicas relacionadas a usuários.
-  - **Requisição:** Não necessita autenticação.
-
 ---
 
 ## Alunos
 
-| <img src="https://avatars.githubusercontent.com/u/61765668?v=4" width="70"> | <img src="https://avatars.githubusercontent.com/u/89415462?v=4" width="70"> | <img src="https://avatars.githubusercontent.com/u/114600184?v=4" width="70"> |
+| <img src="https://avatars.githubusercontent.com/u/61765668?v=4" width="100"> | <img src="https://avatars.githubusercontent.com/u/89415462?v=4" width="100"> | <img src="https://avatars.githubusercontent.com/u/114600184?v=4" width="100"> |
 |------------------------------------------------------------------------------|------------------------------------------------------------------------------|------------------------------------------------------------------------------|
-| [**Allana Ávila**](https://github.com/allanaavila)                           | [**Lucas Alec**](https://github.com/LucasAlec)                              | [**Marina Guimarães**](https://github.com/marinagv95)                              |
+| [**Allana Ávila**](https://github.com/allanaavila)                           | [**Lucas Alec**](https://github.com/LucasAlec)                              | [**Brunna Leite**](https://github.com/brunnafelix)                           |
+
+
 
