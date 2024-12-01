@@ -143,6 +143,3 @@ Os testes utilizam os frameworks **JUnit**, **Mockito** e **WireMock**, e a cobe
 |----------------------------------------------------------------------|--------------------------------------------------------------------------|--------------------------------------------------------------------|
 | [**Allana Ávila**](https://github.com/allanaavila)                   | [**Marina Guimarães**](https://github.com/marinagv95)                    | [**Lucas Alec**](https://github.com/LucasAlec)                    |
 
----
-
-
