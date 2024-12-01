@@ -139,7 +139,8 @@ Os testes utilizam os frameworks **JUnit**, **Mockito** e **WireMock**, e a cobe
 
 ## Alunos
 
-| ![Allana Ávila](https://avatars.githubusercontent.com/u/45733002?v=4) | ![Marina Guimarães](https://avatars.githubusercontent.com/u/36242828?v=4) | ![Lucas Alec](https://avatars.githubusercontent.com/u/46879954?v=4) |
-|----------------------------------------------------------------------|--------------------------------------------------------------------------|--------------------------------------------------------------------|
-| [**Allana Ávila**](https://github.com/allanaavila)                   | [**Marina Guimarães**](https://github.com/marinagv95)                    | [**Lucas Alec**](https://github.com/LucasAlec)                    |
+## Alunos
 
+| ![Allana Ávila](https://avatars.githubusercontent.com/u/61765668?v=4) | ![Lucas Alec](https://avatars.githubusercontent.com/u/89415462?v=4) | ![Seu Nome](https://avatars.githubusercontent.com/u/114600184?v=4) |
+|----------------------------------------------------------------------|--------------------------------------------------------------------|----------------------------------------------------------------|
+| [**Allana Ávila**](https://github.com/allanaavila)                   | [**Lucas Alec**](https://github.com/LucasAlec)                    | [**Seu Nome**](https://github.com/seu_usuario)                |
