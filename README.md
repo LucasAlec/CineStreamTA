@@ -1,136 +1,140 @@
 # Projeto CineStream
 
-CineStream é uma aplicação web desenvolvida utilizando **Java Spring Boot**, projetada para gerenciar filmes e séries favoritos, proporcionando uma interface intuitiva e amigável para explorar e organizar conteúdos de entretenimento.
+CineStream é uma aplicação web desenvolvida utilizando **Java Spring Boot**, projetada para gerenciar filmes e séries favoritos. O sistema oferece uma interface amigável para explorar e organizar conteúdos de entretenimento, com integração a serviços externos para enriquecer a experiência do usuário.
+
+---
 
 ## Funcionalidades
 
-- **Gerenciamento de Filmes**:
-    - Adicionar filmes favoritos.
-    - Buscar filmes por gênero, ano e avaliações.
-    - Exibir avaliações e notas do IMDb.
+### Gerenciamento de Filmes:
+- Adicionar filmes favoritos.
+- Buscar filmes por ano e avaliações.
+- Exibir avaliações e notas do IMDb.
 
-- **Gerenciamento de Séries**:
-    - Adicionar séries favoritas.
-    - Acompanhar séries por temporadas e episódios.
-    - Exibir gênero e ano de lançamento.
+### Gerenciamento de Séries:
+- Adicionar séries favoritas.
+- Acompanhar séries por temporadas e episódios.
+- Exibir o ano de lançamento.
 
-- **Gerenciamento de Usuários**:
-    - Registrar e gerenciar perfis de usuários.
-    - Salvar gêneros e preferências favoritas. (?)
+### Gerenciamento de Usuários:
+- Registrar e gerenciar perfis de usuários.
 
-- **Integração**:
-    - Integração com a API TMDB para obter detalhes de filmes e séries.
+### Integração:
+- Conexão com a **API TMDB** para buscar informações detalhadas de filmes e séries.
 
-## Tecnologias Utilizadas
+---
 
-- **Backend**:
-    - Framework Java Spring Boot
-    - JPA para ORM
-    - APIs REST para comunicação
-- **Banco de Dados**:
-    - H2
-- **Ferramenta de Build**:
-    - Maven
-- **Testes**: (?)
-    - JUnit para testes automatizados (?)
-- **Integração de API**:
-    - API TMDB
+## Tecnologias e Frameworks Utilizados
 
-## Estrutura do Projeto e Distribuição dos Pacotes
+### Backend:
+- **Spring Boot 3.3.5**:
+  - **spring-boot-starter-web**: Para criação de APIs REST.
+  - **spring-boot-starter-security**: Para autenticação e autorização.
+  - **spring-boot-starter-data-jpa**: Para integração com banco de dados.
+  - **spring-boot-starter-cache**: Para gerenciamento de cache.
 
-O projeto segue uma arquitetura em camadas e está organizado nos seguintes pacotes:
+### Banco de Dados:
+- **PostgreSQL**: Para armazenamento em produção.
+- **H2**: Banco de dados em memória para testes.
 
-```
-CineStreamTAI/
-│
-├── client/
-│   └── tmdbapi/
-│       ├── ApiClient.java          # Cliente HTTP para integrar com a API TMDB
-│       └── dto/response/           # DTOs com as respostas da API TMDB
-│
-├── controller/
-│   ├── FilmeController.java        # Controlador para endpoints REST de filmes
-│   ├── SerieController.java        # Controlador para endpoints REST de séries
-│   ├── UsuarioController.java      # Controlador para endpoints REST de usuários
-│   └── AdviceController.java       # Tratamento global de exceções
-│
-├── dto/
-│   ├── request/                    # DTOs para capturar dados das requisições
-│   ├── response/                   # DTOs para formatar respostas
-│   └── mapping/                    # Mapeadores entre entidades e DTOs
-│
-├── exception/
-│   ├── AlreadyExistsException.java # Exceção para recursos duplicados
-│   └── NotFoundException.java      # Exceção para recursos não encontrados
-│
-├── model/
-│   ├── FilmeFavorito.java          # Entidade para filmes favoritos
-│   ├── SerieFavorita.java          # Entidade para séries favoritas
-│   ├── Usuario.java                # Entidade para usuários
-│   └── GeneroFavorito.java         # Entidade para gêneros favoritos
-│
-├── repository/
-│   ├── FilmeFavoritoRepository.java  # Repositório para persistência de filmes
-│   ├── SerieFavoritaRepository.java  # Repositório para persistência de séries
-│   ├── UsuarioRepository.java        # Repositório para persistência de usuários
-│   └── GeneroFavoritoRepository.java # Repositório para persistência de gêneros
-│
-├── service/
-│   ├── FilmeService.java           # Lógica de negócios para filmes
-│   ├── SerieService.java           # Lógica de negócios para séries
-│   └── UsuarioService.java         # Lógica de negócios para usuários
-│
-└── SpringCinestreamApplication.java  # Ponto de entrada principal da aplicação
-```
+### Segurança:
+- **Spring Security**: Implementação de autenticação e autorização.
+- **Java JWT (com.auth0)**: Para geração e validação de tokens JWT.
 
+### Testes:
+- **JUnit**: Framework para testes automatizados.
+- **Mockito**: Mocking de componentes para testes unitários.
+- **WireMock**: Mocking de APIs externas durante os testes.
+- **Cucumber**: Testes de comportamento (BDD).
+- **Spring Security Test**: Testes de autenticação e autorização.
+
+### Gerenciamento de Configurações:
+- **Spring Dotenv**: Gerenciamento de variáveis de ambiente.
+
+### Cache:
+- **Caffeine**: Biblioteca de caching de alto desempenho.
+
+### Ferramentas de Qualidade:
+- **JaCoCo**: Para análise de cobertura de testes com integração ao Maven.
+
+### Ferramenta de Build:
+- **Maven**
+
+---
+
+## Testes Automatizados
+
+O projeto possui cobertura de testes para garantir a consistência das funcionalidades e a integridade do sistema. Os testes implementados cobrem as seguintes camadas:
+
+- **Controller:** Validação dos endpoints REST para garantir a comunicação correta entre cliente e servidor.
+- **DTO:** Verificação do mapeamento correto entre entidades e objetos de transferência de dados.
+- **Service:** Testes das regras de negócio e validação de comportamentos esperados.
+- **Repository:** Testes das operações de persistência no banco de dados.
+- **Cucumber:** Para validação de cenários de comportamento (BDD).
+
+Os testes utilizam os frameworks **JUnit**, **Mockito**, **Cucumber**, e **WireMock**, e a cobertura é analisada com **JaCoCo**. O mínimo de cobertura exigido é de 60% para a camada de classes.
+
+**Repositório de Testes:** [CineStream-test](https://github.com/allanaavila/CineStream-test)
+
+---
 
 ## Endpoints da API
 
+### Usuários
+- **POST** `/register`
+  - Registra um novo usuário.
+  - **Requisição:** Dados do usuário no corpo da requisição.
+  - **Resposta:** Detalhes do usuário criado.
+
+- **POST** `/login`
+  - Realiza autenticação do usuário.
+  - **Requisição:** Credenciais do usuário no corpo da requisição.
+  - **Resposta:** Token de autenticação.
+
+- **GET** `/user/favorites`
+  - Retorna os filmes e séries favoritos do usuário autenticado.
+  - **Requisição:** Necessita autenticação.
+  - **Resposta:** Lista de favoritos do usuário.
+
 ### Filmes
-- **`POST /movies`**
-    - **Descrição:** Adiciona um novo filme favorito.
-    - **Requisição:** Dados do filme no corpo da requisição.
-    - **Resposta:** Detalhes do filme criado.
+- **GET** `/api/filmes`
+  - Retorna uma lista de todos os filmes disponíveis.
+  - **Requisição:** Não possui parâmetros.
+  - **Resposta:** Lista de filmes.
 
-- **`GET /movies`**
-    - **Descrição:** Retorna uma lista de todos os filmes favoritos.
-    - **Requisição:** Não possui parâmetros.
-    - **Resposta:** Lista de filmes favoritos.
+- **GET** `/api/filmes/{id}`
+  - Retorna os detalhes de um filme específico.
+  - **Parâmetro:** `id` do filme.
+  - **Resposta:** Informações detalhadas do filme.
 
-- **`GET /movies/{id}`**
-    - **Descrição:** Retorna os detalhes de um filme específico.
-    - **Parâmetro:** `id` do filme.
-    - **Resposta:** Informações detalhadas do filme.
+- **POST** `/api/filmes/favorito`
+  - Adiciona um filme aos favoritos do usuário autenticado.
+  - **Requisição:** Necessita autenticação e dados do filme no corpo da requisição.
+  - **Resposta:** Detalhes do filme adicionado como favorito.
 
 ### Séries
-- **`POST /series`**
-    - **Descrição:** Adiciona uma nova série favorita.
-    - **Requisição:** Dados da série no corpo da requisição.
-    - **Resposta:** Detalhes da série criada.
+- **GET** `/api/series`
+  - Retorna uma lista de todas as séries disponíveis.
+  - **Requisição:** Não possui parâmetros.
+  - **Resposta:** Lista de séries.
 
-- **`GET /series`**
-    - **Descrição:** Retorna uma lista de todas as séries favoritas.
-    - **Requisição:** Não possui parâmetros.
-    - **Resposta:** Lista de séries favoritas.
+- **GET** `/api/series/{id}`
+  - Retorna os detalhes de uma série específica.
+  - **Parâmetro:** `id` da série.
+  - **Resposta:** Informações detalhadas da série.
 
-- **`GET /series/{id}`**
-    - **Descrição:** Retorna os detalhes de uma série específica.
-    - **Parâmetro:** `id` da série.
-    - **Resposta:** Informações detalhadas da série.
+- **POST** `/api/series/favorita`
+  - Adiciona uma série aos favoritos do usuário autenticado.
+  - **Requisição:** Necessita autenticação e dados da série no corpo da requisição.
+  - **Resposta:** Detalhes da série adicionada como favorita.
 
-### Usuários
-- **`POST /users`**
-    - **Descrição:** Registra um novo usuário.
-    - **Requisição:** Dados do usuário no corpo da requisição.
-    - **Resposta:** Detalhes do usuário criado.
+---
 
-- **`GET /users`**
-    - **Descrição:** Retorna uma lista de perfis de usuários.
-    - **Requisição:** Não possui parâmetros.
-    - **Resposta:** Lista de perfis de usuários registrados.
+## Alunos
 
-### Gêneros (Integrados à API TMDB)
-- **`GET /genres`**
-    - **Descrição:** Retorna uma lista de gêneros de filmes e séries disponíveis.
-    - **Requisição:** Não possui parâmetros.
-    - **Resposta:** Lista de gêneros disponíveis.
+| <img src="https://avatars.githubusercontent.com/u/61765668?v=4" width="100"> | <img src="https://avatars.githubusercontent.com/u/89415462?v=4" width="100"> | <img src="https://avatars.githubusercontent.com/u/114600184?v=4" width="100"> |
+|------------------------------------------------------------------------------|------------------------------------------------------------------------------|------------------------------------------------------------------------------|
+| [**Allana Ávila**](https://github.com/allanaavila)                           | [**Lucas Alec**](https://github.com/LucasAlec)                              | [**Marina Guimarães**](https://github.com/marinagv95)                           |
+
+
+
