@@ -5,7 +5,6 @@ import com.tech.ada.spring_cinestream.exception.ApiClientException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -14,6 +13,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.util.HashMap;
 import java.util.Map;
 
 @Component
@@ -52,7 +52,7 @@ public class ApiClient {
 
 
     public Page&lt;TmdbSerie&gt; buscarSeriesPorTitulo(String titulo, Integer page) {
-<span class="pc" id="L55">        return makeApiCall(</span>
+<span class="nc" id="L55">        return makeApiCall(</span>
                 &quot;/search/tv&quot;,
 <span class="nc" id="L57">                getParams(Map.of(</span>
                     &quot;api_key&quot;, apiKey,
@@ -108,13 +108,13 @@ public class ApiClient {
     }
 
     private Map&lt;String, Object&gt; getParams(Map&lt;String, Object&gt; params) {
-<span class="fc" id="L111">        Map&lt;String, Object&gt; defaults = getParams();</span>
-<span class="nc" id="L112">        params.putAll(defaults);</span>
-<span class="nc" id="L113">        return params;</span>
+<span class="nc" id="L111">        Map&lt;String, Object&gt; defaults = new HashMap&lt;&gt;(getParams());</span>
+<span class="nc" id="L112">        defaults.putAll(params);</span>
+<span class="nc" id="L113">        return defaults;</span>
     }
 
     private Map&lt;String, Object&gt; getParams() {
-<span class="fc" id="L117">        return Map.of(&quot;language&quot;, &quot;pt-BR&quot;);</span>
+<span class="nc" id="L117">        return Map.of(&quot;language&quot;, &quot;pt-BR&quot;);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

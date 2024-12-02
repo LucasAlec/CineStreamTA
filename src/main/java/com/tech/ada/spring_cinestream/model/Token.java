@@ -43,4 +43,20 @@ public class Token {
     public Usuario getUsuario() {
         return usuario;
     }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public void setExpirationDate(Instant expirationDate) {
+        this.expirationDate = expirationDate;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
 }

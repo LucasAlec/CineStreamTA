@@ -42,8 +42,8 @@ public class Usuario {
     }
 
     public void setId(Long id) {
-<span class="nc" id="L45">        this.id = id;</span>
-<span class="nc" id="L46">    }</span>
+<span class="fc" id="L45">        this.id = id;</span>
+<span class="fc" id="L46">    }</span>
 
     public String getNome() {
 <span class="fc" id="L49">        return nome;</span>
@@ -76,10 +76,10 @@ public class Usuario {
 <span class="fc" id="L76">    public void setUsername(String username) {this.username = username;}</span>
 
     public List&lt;TmdbSerie&gt; getSeriesFavoritas() {
-<span class="pc bpc" id="L79" title="1 of 2 branches missed.">        if (seriesFavoritas == null) {</span>
+<span class="fc bfc" id="L79" title="All 2 branches covered.">        if (seriesFavoritas == null) {</span>
 <span class="fc" id="L80">            return new ArrayList&lt;&gt;();</span>
         }
-<span class="nc" id="L82">        return seriesFavoritas.stream().map(SerieFavorita::getTmdbSerie).toList();</span>
+<span class="fc" id="L82">        return seriesFavoritas.stream().map(SerieFavorita::getTmdbSerie).toList();</span>
     }
 
     public void addFilmeFavorito(TmdbFilme tmdbFilme) {
@@ -117,15 +117,15 @@ public class Usuario {
 <span class="nc" id="L117">    }</span>
 
     public void setSeriesFavoritas(List&lt;SerieFavorita&gt; seriesFavoritas) {
-<span class="nc" id="L120">        this.seriesFavoritas = seriesFavoritas;</span>
-<span class="nc" id="L121">    }</span>
+<span class="fc" id="L120">        this.seriesFavoritas = seriesFavoritas;</span>
+<span class="fc" id="L121">    }</span>
 
 
     public List&lt;TmdbFilme&gt; getFilmesFavoritos() {
-<span class="pc bpc" id="L125" title="1 of 2 branches missed.">        if (filmesFavoritos == null) {</span>
+<span class="fc bfc" id="L125" title="All 2 branches covered.">        if (filmesFavoritos == null) {</span>
 <span class="fc" id="L126">            return new ArrayList&lt;&gt;();</span>
         }
-<span class="nc" id="L128">        return filmesFavoritos.stream().map(FilmeFavorito::getTmdbFilme).toList();</span>
+<span class="fc" id="L128">        return filmesFavoritos.stream().map(FilmeFavorito::getTmdbFilme).toList();</span>
     }
 
 <span class="fc" id="L131">    public void setFilmesFavoritos(List&lt;FilmeFavorito&gt; filmesFavoritos) {this.filmesFavoritos = filmesFavoritos;}</span>

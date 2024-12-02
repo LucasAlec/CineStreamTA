@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.tech.ada.spring_cinestream.controller.FilmeControllerTest
 -------------------------------------------------------------------------------
-Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.779 s -- in com.tech.ada.spring_cinestream.controller.FilmeControllerTest
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.825 s -- in com.tech.ada.spring_cinestream.controller.FilmeControllerTest

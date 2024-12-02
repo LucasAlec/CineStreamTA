@@ -16,40 +16,40 @@ import java.util.List;
 <span class="fc" id="L16">public class UsuarioMapper {</span>
 
     public Usuario toEntity(UsuarioRequest dto) {
-<span class="nc" id="L19">        Usuario usuario = new Usuario();</span>
-<span class="nc" id="L20">        usuario.setNome(dto.getNome());</span>
-<span class="nc" id="L21">        usuario.setUsername(dto.getUsername());</span>
-<span class="nc" id="L22">        usuario.setEmail(dto.getEmail());</span>
-<span class="nc" id="L23">        usuario.setSenha(dto.getSenha());</span>
-<span class="nc" id="L24">        usuario.setFilmesFavoritos(new ArrayList&lt;&gt;());</span>
-<span class="nc" id="L25">        usuario.setSeriesFavoritas(new ArrayList&lt;&gt;());</span>
-<span class="nc" id="L26">        return usuario;</span>
+<span class="fc" id="L19">        Usuario usuario = new Usuario();</span>
+<span class="fc" id="L20">        usuario.setNome(dto.getNome());</span>
+<span class="fc" id="L21">        usuario.setUsername(dto.getUsername());</span>
+<span class="fc" id="L22">        usuario.setEmail(dto.getEmail());</span>
+<span class="fc" id="L23">        usuario.setSenha(dto.getSenha());</span>
+<span class="fc" id="L24">        usuario.setFilmesFavoritos(new ArrayList&lt;&gt;());</span>
+<span class="fc" id="L25">        usuario.setSeriesFavoritas(new ArrayList&lt;&gt;());</span>
+<span class="fc" id="L26">        return usuario;</span>
     }
 
     public UsuarioResponse toDTO(Usuario usuario, List&lt;TmdbFilme&gt; filmesFavoritos, List&lt;TmdbSerie&gt; seriesFavoritas) {
-<span class="nc" id="L30">        UsuarioResponse dto = new UsuarioResponse();</span>
-<span class="nc" id="L31">        dto.setId(usuario.getId());</span>
-<span class="nc" id="L32">        dto.setNome(usuario.getNome());</span>
-<span class="nc" id="L33">        dto.setUsername(usuario.getUsername());</span>
-<span class="nc" id="L34">        dto.setEmail(usuario.getEmail());</span>
+<span class="fc" id="L30">        UsuarioResponse dto = new UsuarioResponse();</span>
+<span class="fc" id="L31">        dto.setId(usuario.getId());</span>
+<span class="fc" id="L32">        dto.setNome(usuario.getNome());</span>
+<span class="fc" id="L33">        dto.setUsername(usuario.getUsername());</span>
+<span class="fc" id="L34">        dto.setEmail(usuario.getEmail());</span>
 
-<span class="nc" id="L36">        dto.setFilmesFavoritos(filmesFavoritos);</span>
-<span class="nc" id="L37">        dto.setSeriesFavoritas(seriesFavoritas);</span>
+<span class="fc" id="L36">        dto.setFilmesFavoritos(filmesFavoritos);</span>
+<span class="fc" id="L37">        dto.setSeriesFavoritas(seriesFavoritas);</span>
 
-<span class="nc" id="L39">        return dto;</span>
+<span class="fc" id="L39">        return dto;</span>
     }
 
     public UsuarioResponse toDTO(Usuario usuario) {
-<span class="nc" id="L43">        UsuarioResponse dto = new UsuarioResponse();</span>
-<span class="nc" id="L44">        dto.setId(usuario.getId());</span>
-<span class="nc" id="L45">        dto.setNome(usuario.getNome());</span>
-<span class="nc" id="L46">        dto.setUsername(usuario.getUsername());</span>
-<span class="nc" id="L47">        dto.setEmail(usuario.getEmail());</span>
+<span class="fc" id="L43">        UsuarioResponse dto = new UsuarioResponse();</span>
+<span class="fc" id="L44">        dto.setId(usuario.getId());</span>
+<span class="fc" id="L45">        dto.setNome(usuario.getNome());</span>
+<span class="fc" id="L46">        dto.setUsername(usuario.getUsername());</span>
+<span class="fc" id="L47">        dto.setEmail(usuario.getEmail());</span>
 
-<span class="nc" id="L49">        dto.setFilmesFavoritos(Collections.emptyList());</span>
-<span class="nc" id="L50">        dto.setSeriesFavoritas(Collections.emptyList());</span>
+<span class="fc" id="L49">        dto.setFilmesFavoritos(Collections.emptyList());</span>
+<span class="fc" id="L50">        dto.setSeriesFavoritas(Collections.emptyList());</span>
 
-<span class="nc" id="L52">        return dto;</span>
+<span class="fc" id="L52">        return dto;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

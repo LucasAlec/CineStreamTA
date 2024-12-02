@@ -1,14 +1,18 @@
 package com.tech.ada.spring_cinestream.repository;
 
 import com.tech.ada.spring_cinestream.model.Usuario;
+import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.TestPropertySource;
 
 import java.util.Optional;
 
-@DataJpaTest
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+@Transactional
+@SpringBootTest
+@TestPropertySource(locations = "classpath:application-test.properties")
 public class UsuarioRepositoryTest {
 
     @Autowired
@@ -19,7 +23,7 @@ public class UsuarioRepositoryTest {
     @BeforeEach
     public void setup() {
         usuario = new Usuario();
-        usuario.setEmail("joao@email.com");
+        usuario.setEmail("joao@gmail.com");
         usuario.setSenha("senha123");
         usuario.setUsername("joao123");
         usuario.setNome("João da Silva");
@@ -27,26 +31,31 @@ public class UsuarioRepositoryTest {
         usuarioRepository.save(usuario);
     }
 
+
     @Test
     @Order(1)
-    public void usuarioJaCadastrado_encontrarPorEmail_deveRetornarUsuario() {
-        Optional<Usuario> encontrado = usuarioRepository.findByEmail("joao@email.com");
+    public void quandoEmailNaoExistente_entaoDeveRetornarVazio() {
+        Optional<Usuario> encontrado = usuarioRepository.findByEmail("naoexiste@gmail.com");
 
-        Assertions.assertTrue(encontrado.isPresent(), "Usuário deveria ser encontrado");
-
-        Assertions.assertEquals(usuario.getEmail(), encontrado.get().getEmail(), "Os e-mails não são iguais");
+        Assertions.assertTrue(encontrado.isEmpty(), "Esperava-se que o usuário não fosse encontrado, mas o retorno não foi vazio.");
     }
 
     @Test
     @Order(2)
-    public void usuarioNaoCadastrado_encontrarPorEmail_deveRetornarVazio() {
-        Optional<Usuario> encontrado = usuarioRepository.findByEmail("naoexiste@email.com");
+    public void usuarioJaCadastrado_existsPorEmail_deveRetornarTrue() {
+        String email = "joao@gmail.com";
+        boolean existe = usuarioRepository.existsUsuarioByEmail(email);
 
-        Assertions.assertTrue(encontrado.isEmpty(), "O usuário não deveria ser encontrado");
+        Assertions.assertTrue(existe, "O usuário deveria existir com o e-mail informado.");
     }
 
-    @AfterEach
-    public void tearDown() {
-        usuarioRepository.deleteAll();
+    @Test
+    @Order(3)
+    public void quandoEmailNaoCadastrado_existsPorEmail_deveRetornarFalse() {
+        String emailNaoCadastrado = "naoexiste@gmail.com";
+        boolean existe = usuarioRepository.existsUsuarioByEmail(emailNaoCadastrado);
+
+        Assertions.assertFalse(existe, "O usuário não deveria existir com o e-mail informado.");
     }
+
 }
