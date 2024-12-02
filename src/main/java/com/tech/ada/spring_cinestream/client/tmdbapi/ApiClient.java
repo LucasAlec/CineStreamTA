@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.util.HashMap;
 import java.util.Map;
 
 @Component
@@ -108,9 +109,9 @@ public class ApiClient {
     }
 
     private Map<String, Object> getParams(Map<String, Object> params) {
-        Map<String, Object> defaults = getParams();
-        params.putAll(defaults);
-        return params;
+        Map<String, Object> defaults = new HashMap<>(getParams());
+        defaults.putAll(params);
+        return defaults;
     }
 
     private Map<String, Object> getParams() {
